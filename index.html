@@ -1,12 +1,10 @@
 <title>윤태형 포트폴리오</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   @font-face {
     font-family: "GmarketSans";
     src: url("assets/GmarketSansMedium.woff2") format("woff2");
-    font-weight: 400 700;
+    /* 실제 파일은 Medium 한 종뿐이다. 400만 선언해야 700에서 브라우저가 볼드를 합성한다 */
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
@@ -24,9 +22,9 @@
     --accent-soft:  #E4EFEC;
     --metric:       #935410;
     --metric-soft:  #F7EEDF;
+    --hot:          #B42318;
 
     --sans: "GmarketSans", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
     --col: 45rem;
     --rail: 9.2rem;
@@ -51,10 +49,12 @@
   a:hover { border-bottom-color: var(--accent); }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-  code, .mono { font-family: var(--mono); font-size: 0.86em; font-variant-numeric: tabular-nums; letter-spacing: 0; }
   code {
+    font-family: inherit;
+    font-size: 0.93em;
+    font-variant-numeric: tabular-nums;
     background: var(--surface-sunk);
-    padding: 0.1em 0.35em;
+    padding: 0.1em 0.38em;
     border-radius: 3px;
     color: var(--ink-2);
     word-break: break-all;
@@ -71,7 +71,7 @@
   .topbar .wrap { display: flex; align-items: baseline; gap: 1.25rem; padding-block: 0.75rem; flex-wrap: wrap; }
   .wordmark { font-size: 1.06rem; letter-spacing: 0.04em; color: var(--ink); border: none; margin-right: auto; }
   .topnav { display: flex; gap: 0.9rem; flex-wrap: wrap; }
-  .topnav a { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.04em; color: var(--ink-3); border-bottom: none; }
+  .topnav a { font-size: 0.9rem; letter-spacing: 0.01em; color: var(--ink-3); border-bottom: none; }
   .topnav a:hover { color: var(--accent); }
 
   /* ── side nav ────────────────────────── */
@@ -79,14 +79,14 @@
   .sidenav ul { list-style: none; margin: 0; padding: 0; }
   .sidenav a {
     display: block; border-bottom: none;
-    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.02em;
+    font-size: 0.88rem; letter-spacing: 0;
     color: var(--ink-3); padding: 0.3rem 0 0.3rem 0.75rem;
     border-left: 2px solid var(--rule);
     transition: color 0.15s ease, border-color 0.15s ease;
   }
   .sidenav a:hover { color: var(--ink-2); border-left-color: var(--rule-strong); }
-  .sidenav a[aria-current="true"] { color: var(--accent); border-left-color: var(--accent); }
-  .sidenav .sub a { padding-left: 1.5rem; font-size: 0.71rem; }
+  .sidenav a[aria-current="true"] { color: var(--accent); border-left-color: var(--accent); font-weight: 700; }
+  .sidenav .sub a { padding-left: 1.5rem; font-size: 0.84rem; }
 
   @media (min-width: 1140px) {
     .sidenav {
@@ -109,9 +109,9 @@
   }
   .ident-body { min-width: 0; }
   .ident-name { font-size: 1.7rem; letter-spacing: 0.02em; line-height: 1.3; margin: 0 0 0.2rem; }
-  .ident-name span { font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.1em; color: var(--ink-3); margin-left: 0.55rem; white-space: nowrap; }
-  .ident-role { margin: 0 0 0.75rem; color: var(--ink-2); font-size: 1.02rem; }
-  .ident-links { display: flex; gap: 1rem; flex-wrap: wrap; font-family: var(--mono); font-size: 0.84rem; }
+  .ident-name span { font-size: 0.85rem; letter-spacing: 0.08em; color: var(--ink-3); margin-left: 0.55rem; white-space: nowrap; }
+  .ident-role { margin: 0 0 0.75rem; color: var(--ink-2); font-size: 1.02rem; font-weight: 700; }
+  .ident-links { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.92rem; }
 
   h1 {
     font-size: clamp(1.8rem, 6vw, 2.5rem);
@@ -130,41 +130,49 @@
   section { padding-block: 2.6rem; }
   .sec-head { display: flex; align-items: baseline; gap: 0.9rem; border-bottom: 2px solid var(--ink); padding-bottom: 0.5rem; margin-bottom: 1.6rem; }
   .sec-head h2 { font-size: 1.32rem; margin: 0; letter-spacing: 0.01em; }
-  .sec-head .en { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-left: auto; }
+  .sec-head .en { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-left: auto; }
 
   /* ── chips ───────────────────────────── */
-  .chip { display: inline-block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; padding: 0.14em 0.5em; border-radius: 2px; white-space: nowrap; vertical-align: 0.12em; }
+  .chip { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.16em 0.5em; border-radius: 2px; white-space: nowrap; vertical-align: 0.1em; }
   .chip-measured { background: var(--accent-soft); color: var(--accent); }
   .chip-scenario { background: var(--metric-soft); color: var(--metric); }
 
   /* ── capability rows ─────────────────── */
   .cap { display: grid; grid-template-columns: var(--rail) 1fr; gap: 1.2rem; padding-block: 1.1rem; border-bottom: 1px solid var(--rule); }
   .cap:first-child { border-top: 1px solid var(--rule); }
-  .cap-name { font-size: 1.02rem; color: var(--ink); }
-  .cap-name span { display: block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; color: var(--ink-3); margin-top: 0.2rem; }
+  .cap-name { font-size: 1.02rem; color: var(--ink); font-weight: 700; }
+  .cap-name span { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.06em; color: var(--ink-3); margin-top: 0.2rem; }
   .cap p { margin: 0; color: var(--ink-2); }
-  .cap p .src { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-3); display: block; margin-top: 0.35rem; }
+  .cap p .src { font-size: 0.8rem; color: var(--ink-3); display: block; margin-top: 0.35rem; }
 
   /* ── tables ──────────────────────────── */
   .tablewrap { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; font-size: 0.96rem; }
   th, td { text-align: left; vertical-align: top; padding: 0.65rem 0.7rem 0.65rem 0; border-bottom: 1px solid var(--rule); }
-  th { font-family: var(--mono); font-weight: 500; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
+  th { font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
   td:first-child { white-space: nowrap; padding-right: 1.4rem; }
-  td .n { font-family: var(--mono); color: var(--ink-2); font-size: 0.82rem; letter-spacing: 0; }
+  td .n { color: var(--ink-2); font-size: 0.88rem; }
 
   /* ── project detail ──────────────────── */
   .project { padding-block: 3rem 1rem; border-top: 1px solid var(--rule); }
   .p-title { font-size: clamp(1.42rem, 4.8vw, 1.78rem); margin: 0 0 0.5rem; line-height: 1.35; letter-spacing: 0.01em; }
-  .p-title .tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-3); display: block; margin-bottom: 0.55rem; }
+  .p-title .tag { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-3); display: block; margin-bottom: 0.55rem; }
   .p-sub { margin: 0 0 1.4rem; color: var(--ink-2); }
 
+  /* 로고는 각자 배경색이 박혀 있어서 타일 배경을 로고에 맞춘다 */
+  .p-logo { margin: 0 0 1.7rem; display: inline-block; max-width: 100%; border: 1px solid var(--rule); overflow: hidden; }
+  .p-logo img { display: block; height: 124px; width: auto; max-width: 100%; object-fit: contain; padding: 1.05rem 1.2rem; }
+  #mingpark  .p-logo { background: #FFFFFF; }
+  #tocktalks .p-logo { background: #FFFFFF; }
+  #mealiver  .p-logo { background: #000000; border-color: #000000; }
+  #eta       .p-logo { background: #52ACFF; border-color: #52ACFF; }
+
   .meta { display: grid; grid-template-columns: var(--rail) 1fr; gap: 0.5rem 1.2rem; font-size: 0.95rem; background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; margin-bottom: 1.8rem; }
-  .meta dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); padding-top: 0.3rem; }
+  .meta dt { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding-top: 0.3rem; }
   .meta dd { margin: 0; color: var(--ink-2); }
 
   .scope { margin: 0 0 2rem; }
-  .scope h4 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 0.6rem; font-weight: 500; }
+  .scope h4 { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 0.6rem; font-weight: 700; }
   .scope ul { margin: 0; padding-left: 1.1rem; color: var(--ink-2); }
   .scope li { margin-bottom: 0.3rem; }
 
@@ -174,28 +182,29 @@
   .steps { display: grid; margin: 0; }
   .step { display: grid; grid-template-columns: 4.8rem 1fr; gap: 0.35rem 1rem; padding-block: 0.6rem; border-bottom: 1px dotted var(--rule); }
   .step:last-child { border-bottom: none; }
-  .step dt { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--ink-3); padding-top: 0.35rem; }
+  .step dt { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--ink-3); padding-top: 0.35rem; }
   .step dd { margin: 0; color: var(--ink-2); }
+  .step.is-result dt { color: var(--hot); }
   .step.is-result dd { color: var(--ink); }
-  .num { font-family: var(--mono); color: var(--metric); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+  .num { color: var(--hot); font-weight: 700; font-variant-numeric: tabular-nums; }
 
   /* ── record ──────────────────────────── */
   .rec { display: grid; grid-template-columns: var(--rail) 1fr; gap: 0.35rem 1.3rem; padding-block: 1.25rem; border-bottom: 1px solid var(--rule); }
   .rec:first-child { border-top: 1px solid var(--rule); }
   .rec-when {
-    font-family: var(--mono); font-size: 0.92rem; line-height: 1.5;
-    color: var(--ink); padding-top: 0.25rem; letter-spacing: 0;
+    font-size: 0.95rem; line-height: 1.5;
+    color: var(--ink); padding-top: 0.25rem;
     font-variant-numeric: tabular-nums;
   }
-  .rec-when b { display: block; font-weight: 400; color: var(--ink-3); font-size: 0.8rem; letter-spacing: 0.04em; }
-  .rec-what > strong { display: block; margin-bottom: 0.2rem; font-weight: 400; font-size: 1.06rem; letter-spacing: 0.01em; }
-  .rec-what > strong em { font-style: normal; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-3); letter-spacing: 0.06em; margin-left: 0.5rem; }
+  .rec-when b { display: block; font-weight: 400; color: var(--ink-3); font-size: 0.84rem; letter-spacing: 0.02em; }
+  .rec-what > strong { display: block; margin-bottom: 0.2rem; font-weight: 700; font-size: 1.06rem; letter-spacing: 0.01em; }
+  .rec-what > strong em { font-style: normal; font-weight: 400; font-size: 0.82rem; color: var(--ink-3); letter-spacing: 0.04em; margin-left: 0.5rem; }
   .rec-what p { margin: 0; color: var(--ink-2); font-size: 0.97rem; }
   .rec-what ul { margin: 0.1rem 0 0; padding-left: 1.05rem; color: var(--ink-2); font-size: 0.97rem; }
   .rec-what li { margin-bottom: 0.15rem; }
 
   footer { border-top: 2px solid var(--ink); margin-top: 3rem; padding-block: 2rem 4rem; }
-  .foot-links { display: flex; gap: 1.4rem; flex-wrap: wrap; font-family: var(--mono); font-size: 0.85rem; }
+  .foot-links { display: flex; gap: 1.4rem; flex-wrap: wrap; font-size: 0.92rem; }
   .foot-note { margin: 1.4rem 0 0; font-size: 0.86rem; color: var(--ink-3); }
 
   @media (max-width: 560px) {
@@ -206,6 +215,7 @@
     .hero { padding-block: 2.5rem 2rem; }
     .ident { gap: 1.1rem; }
     .ident img { width: 78px; height: 100px; }
+    .p-logo img { height: 92px; padding: 0.85rem 0.95rem; }
   }
 
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -398,6 +408,9 @@
 
     <!-- ── MINGPARK ─────────────────────── -->
     <article class="project" id="mingpark">
+      <figure class="p-logo">
+        <img src="assets/mingpark-logo.png" alt="MINGPARK 로고" width="1120" height="180" loading="lazy">
+      </figure>
       <h2 class="p-title"><span class="tag">2026.06 – 07 · 콘서트 예매</span>MINGPARK</h2>
       <p class="p-sub">공연 탐색부터 대기열 입장, 좌석 선점, 포인트 결제와 환불까지 하나의 흐름으로 묶은 예매 서비스입니다.</p>
 
@@ -451,6 +464,9 @@
 
     <!-- ── TOCKTALKS ────────────────────── -->
     <article class="project" id="tocktalks">
+      <figure class="p-logo">
+        <img src="assets/tocktalks-logo.png" alt="TOCKTALKS 로고" width="316" height="203" loading="lazy">
+      </figure>
       <h2 class="p-title"><span class="tag">2026.07 · 실시간 모의투자</span>TOCKTALKS</h2>
       <p class="p-sub">같은 시드머니로 방을 만들어 정해진 시간 동안 수익률을 겨루고, 인증된 투자 카드를 커뮤니티에 공유하는 서비스입니다. 실시간 주가는 KIS Open API에서 받아옵니다.</p>
 
@@ -517,6 +533,9 @@
 
     <!-- ── Mealiver-IT ──────────────────── -->
     <article class="project" id="mealiver">
+      <figure class="p-logo">
+        <img src="assets/mealiver-logo.png" alt="Mealiver-IT 로고" width="256" height="256" loading="lazy">
+      </figure>
       <h2 class="p-title"><span class="tag">2026.08 · 선착순 쿠폰</span>Mealiver-IT</h2>
       <p class="p-sub">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다. 재고 1만 개에 동시 요청 2만 건이 들어와도 초과 발급 0과 1인 1매를 지키는 것이 목표였습니다.</p>
 
@@ -569,6 +588,9 @@
 
     <!-- ── AI-BASED-ETA ─────────────────── -->
     <article class="project" id="eta">
+      <figure class="p-logo">
+        <img src="assets/eta-logo.svg" alt="미래지도 (AI-BASED-ETA) 로고" width="750" height="375" loading="lazy">
+      </figure>
       <h2 class="p-title"><span class="tag">2024.03 – 06 · 세종대 캡스톤</span>AI-BASED-ETA</h2>
       <p class="p-sub">한국도로교통공사 공공데이터의 VDS 데이터로 학습한 모델을 써서, 출발 시각에 따라 달라지는 도착 시간과 최단 시간 경로를 계산하는 서비스입니다.</p>
 
