@@ -1,0 +1,720 @@
+<title>윤태형 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  @font-face {
+    font-family: "GmarketSans";
+    src: url("assets/GmarketSansMedium.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --paper:        #FFFFFF;
+    --surface:      #FFFFFF;
+    --surface-sunk: #F4F5F3;
+    --ink:          #15181B;
+    --ink-2:        #41474C;
+    --ink-3:        #767D82;
+    --rule:         #E5E7E4;
+    --rule-strong:  #C8CCC7;
+    --accent:       #0E6A5E;
+    --accent-soft:  #E4EFEC;
+    --metric:       #935410;
+    --metric-soft:  #F7EEDF;
+
+    --sans: "GmarketSans", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+    --col: 45rem;
+    --rail: 9.2rem;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.8;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(14,106,94,0.3); }
+  a:hover { border-bottom-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  code, .mono { font-family: var(--mono); font-size: 0.86em; font-variant-numeric: tabular-nums; letter-spacing: 0; }
+  code {
+    background: var(--surface-sunk);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    color: var(--ink-2);
+    word-break: break-all;
+  }
+  b, strong { font-weight: 700; color: var(--ink); }
+
+  .wrap { max-width: var(--col); margin: 0 auto; padding-inline: 20px; }
+
+  .skip { position: absolute; left: -9999px; background: #fff; color: var(--ink); padding: 0.5rem 0.9rem; border: 1px solid var(--rule-strong); }
+  .skip:focus { left: 1rem; top: 1rem; z-index: 20; }
+
+  /* ── top bar ─────────────────────────── */
+  .topbar { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .topbar .wrap { display: flex; align-items: baseline; gap: 1.25rem; padding-block: 0.75rem; flex-wrap: wrap; }
+  .wordmark { font-size: 1.06rem; letter-spacing: 0.04em; color: var(--ink); border: none; margin-right: auto; }
+  .topnav { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+  .topnav a { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.04em; color: var(--ink-3); border-bottom: none; }
+  .topnav a:hover { color: var(--accent); }
+
+  /* ── side nav ────────────────────────── */
+  .sidenav { display: none; }
+  .sidenav ul { list-style: none; margin: 0; padding: 0; }
+  .sidenav a {
+    display: block; border-bottom: none;
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.02em;
+    color: var(--ink-3); padding: 0.3rem 0 0.3rem 0.75rem;
+    border-left: 2px solid var(--rule);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .sidenav a:hover { color: var(--ink-2); border-left-color: var(--rule-strong); }
+  .sidenav a[aria-current="true"] { color: var(--accent); border-left-color: var(--accent); }
+  .sidenav .sub a { padding-left: 1.5rem; font-size: 0.71rem; }
+
+  @media (min-width: 1140px) {
+    .sidenav {
+      display: block;
+      position: fixed; top: 50%; transform: translateY(-50%);
+      left: calc(50% - 22.5rem - 11.5rem);
+      width: 10.5rem; z-index: 9;
+    }
+    .topnav .anchor { display: none; }
+  }
+
+  /* ── identity ────────────────────────── */
+  .hero { padding-block: 3.5rem 3rem; }
+  .ident { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 2.6rem; }
+  .ident img {
+    width: 96px; height: 123px; max-width: 100%;
+    object-fit: cover; display: block;
+    border: 1px solid var(--rule); border-radius: 2px;
+    flex: none;
+  }
+  .ident-body { min-width: 0; }
+  .ident-name { font-size: 1.7rem; letter-spacing: 0.02em; line-height: 1.3; margin: 0 0 0.2rem; }
+  .ident-name span { font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.1em; color: var(--ink-3); margin-left: 0.55rem; white-space: nowrap; }
+  .ident-role { margin: 0 0 0.75rem; color: var(--ink-2); font-size: 1.02rem; }
+  .ident-links { display: flex; gap: 1rem; flex-wrap: wrap; font-family: var(--mono); font-size: 0.84rem; }
+
+  h1 {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    line-height: 1.42; letter-spacing: -0.02em;
+    margin: 0 0 1.5rem; text-wrap: balance;
+  }
+  .lede { margin: 0 0 1.05rem; color: var(--ink-2); font-size: 1.06rem; }
+
+  .legend { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); padding: 1rem 1.15rem; margin-top: 2rem; }
+  .legend p { margin: 0 0 0.7rem; font-size: 0.97rem; color: var(--ink-2); }
+  .legend dl { margin: 0; display: grid; gap: 0.3rem; }
+  .legend div { display: flex; gap: 0.6rem; align-items: baseline; font-size: 0.92rem; }
+  .legend dd { margin: 0; color: var(--ink-3); }
+
+  /* ── sections ────────────────────────── */
+  section { padding-block: 2.6rem; }
+  .sec-head { display: flex; align-items: baseline; gap: 0.9rem; border-bottom: 2px solid var(--ink); padding-bottom: 0.5rem; margin-bottom: 1.6rem; }
+  .sec-head h2 { font-size: 1.32rem; margin: 0; letter-spacing: 0.01em; }
+  .sec-head .en { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-left: auto; }
+
+  /* ── chips ───────────────────────────── */
+  .chip { display: inline-block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; padding: 0.14em 0.5em; border-radius: 2px; white-space: nowrap; vertical-align: 0.12em; }
+  .chip-measured { background: var(--accent-soft); color: var(--accent); }
+  .chip-scenario { background: var(--metric-soft); color: var(--metric); }
+
+  /* ── capability rows ─────────────────── */
+  .cap { display: grid; grid-template-columns: var(--rail) 1fr; gap: 1.2rem; padding-block: 1.1rem; border-bottom: 1px solid var(--rule); }
+  .cap:first-child { border-top: 1px solid var(--rule); }
+  .cap-name { font-size: 1.02rem; color: var(--ink); }
+  .cap-name span { display: block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; color: var(--ink-3); margin-top: 0.2rem; }
+  .cap p { margin: 0; color: var(--ink-2); }
+  .cap p .src { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-3); display: block; margin-top: 0.35rem; }
+
+  /* ── tables ──────────────────────────── */
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.96rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.65rem 0.7rem 0.65rem 0; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--mono); font-weight: 500; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
+  td:first-child { white-space: nowrap; padding-right: 1.4rem; }
+  td .n { font-family: var(--mono); color: var(--ink-2); font-size: 0.82rem; letter-spacing: 0; }
+
+  /* ── project detail ──────────────────── */
+  .project { padding-block: 3rem 1rem; border-top: 1px solid var(--rule); }
+  .p-title { font-size: clamp(1.42rem, 4.8vw, 1.78rem); margin: 0 0 0.5rem; line-height: 1.35; letter-spacing: 0.01em; }
+  .p-title .tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-3); display: block; margin-bottom: 0.55rem; }
+  .p-sub { margin: 0 0 1.4rem; color: var(--ink-2); }
+
+  .meta { display: grid; grid-template-columns: var(--rail) 1fr; gap: 0.5rem 1.2rem; font-size: 0.95rem; background: var(--surface); border: 1px solid var(--rule); padding: 1.1rem 1.2rem; margin-bottom: 1.8rem; }
+  .meta dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); padding-top: 0.3rem; }
+  .meta dd { margin: 0; color: var(--ink-2); }
+
+  .scope { margin: 0 0 2rem; }
+  .scope h4 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 0.6rem; font-weight: 500; }
+  .scope ul { margin: 0; padding-left: 1.1rem; color: var(--ink-2); }
+  .scope li { margin-bottom: 0.3rem; }
+
+  .case { margin-bottom: 2.4rem; }
+  .case > h3 { font-size: 1.1rem; margin: 0 0 1rem; padding-left: 0.85rem; border-left: 3px solid var(--accent); line-height: 1.6; }
+  .case > h3 .chip { margin-left: 0.45rem; }
+  .steps { display: grid; margin: 0; }
+  .step { display: grid; grid-template-columns: 4.8rem 1fr; gap: 0.35rem 1rem; padding-block: 0.6rem; border-bottom: 1px dotted var(--rule); }
+  .step:last-child { border-bottom: none; }
+  .step dt { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--ink-3); padding-top: 0.35rem; }
+  .step dd { margin: 0; color: var(--ink-2); }
+  .step.is-result dd { color: var(--ink); }
+  .num { font-family: var(--mono); color: var(--metric); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+
+  /* ── record ──────────────────────────── */
+  .rec { display: grid; grid-template-columns: var(--rail) 1fr; gap: 0.35rem 1.3rem; padding-block: 1.25rem; border-bottom: 1px solid var(--rule); }
+  .rec:first-child { border-top: 1px solid var(--rule); }
+  .rec-when {
+    font-family: var(--mono); font-size: 0.92rem; line-height: 1.5;
+    color: var(--ink); padding-top: 0.25rem; letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .rec-when b { display: block; font-weight: 400; color: var(--ink-3); font-size: 0.8rem; letter-spacing: 0.04em; }
+  .rec-what > strong { display: block; margin-bottom: 0.2rem; font-weight: 400; font-size: 1.06rem; letter-spacing: 0.01em; }
+  .rec-what > strong em { font-style: normal; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-3); letter-spacing: 0.06em; margin-left: 0.5rem; }
+  .rec-what p { margin: 0; color: var(--ink-2); font-size: 0.97rem; }
+  .rec-what ul { margin: 0.1rem 0 0; padding-left: 1.05rem; color: var(--ink-2); font-size: 0.97rem; }
+  .rec-what li { margin-bottom: 0.15rem; }
+
+  footer { border-top: 2px solid var(--ink); margin-top: 3rem; padding-block: 2rem 4rem; }
+  .foot-links { display: flex; gap: 1.4rem; flex-wrap: wrap; font-family: var(--mono); font-size: 0.85rem; }
+  .foot-note { margin: 1.4rem 0 0; font-size: 0.86rem; color: var(--ink-3); }
+
+  @media (max-width: 560px) {
+    .cap, .rec, .meta { grid-template-columns: 1fr; gap: 0.35rem; }
+    .step { grid-template-columns: 1fr; gap: 0.1rem; }
+    .step dt { padding-top: 0.4rem; }
+    .sec-head .en { display: none; }
+    .hero { padding-block: 2.5rem 2rem; }
+    .ident { gap: 1.1rem; }
+    .ident img { width: 78px; height: 100px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  html { scroll-behavior: smooth; }
+  :target { scroll-margin-top: 4.5rem; }
+</style>
+
+<a class="skip" href="#content">본문으로 바로가기</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="#top">윤태형</a>
+    <nav class="topnav" aria-label="섹션">
+      <a class="anchor" href="#skills">기술</a>
+      <a class="anchor" href="#projects">프로젝트</a>
+      <a class="anchor" href="#record">경력·학력</a>
+      <a href="https://github.com/YunTaeng">GitHub ↗</a>
+    </nav>
+  </div>
+</div>
+
+<nav class="sidenav" aria-label="목차">
+  <ul>
+    <li><a href="#top">소개</a></li>
+    <li><a href="#capability">세 가지 축</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li class="sub"><a href="#mingpark">MINGPARK</a></li>
+    <li class="sub"><a href="#tocktalks">TOCKTALKS</a></li>
+    <li class="sub"><a href="#mealiver">Mealiver-IT</a></li>
+    <li class="sub"><a href="#eta">AI-BASED-ETA</a></li>
+    <li><a href="#record">경력·학력</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <header class="hero wrap" id="top">
+    <div class="ident">
+      <img src="assets/photo.jpg" alt="윤태형 프로필 사진" width="96" height="123">
+      <div class="ident-body">
+        <p class="ident-name">윤태형<span>YUN TAE HYEONG</span></p>
+        <p class="ident-role">백엔드 개발자</p>
+        <div class="ident-links">
+          <a href="mailto:howard9166@naver.com">howard9166@naver.com</a>
+          <a href="https://github.com/YunTaeng">github.com/YunTaeng</a>
+        </div>
+      </div>
+    </div>
+
+    <h1>요청이 한꺼번에 몰리는 자리를 맡아 왔습니다.</h1>
+    <p class="lede">
+      티켓 예매 대기열, 실시간 모의투자 서비스의 인증, 선착순 쿠폰 시스템의 데이터 파이프라인.
+      최근 네 개의 팀 프로젝트에서 제가 맡은 범위는 모두 <b>동시에 들어온 요청이 서로를 덮어쓰지 않게 만드는 쪽</b>이었습니다.
+    </p>
+    <p class="lede">
+      그 전에는 3년 3개월 동안 헬프데스크 운영과 IT 자산 관리를 하며 장애 요청을 받는 쪽에 있었습니다.
+      운영이 무엇 때문에 힘들어지는지 겪어봤습니다. 돌아가는 코드와 운영할 수 있는 코드는 다르고, 그 차이를 전제로 개발합니다.
+    </p>
+
+    <div class="legend">
+      <p><b>측정하지 않은 성능 수치는 이 페이지에 쓰지 않았습니다.</b> 대신 각 결과를 어디까지 확인했는지 표기했습니다.</p>
+      <dl>
+        <div><dt><span class="chip chip-measured">측정됨</span></dt><dd>실행 결과나 저장된 기록으로 확인한 값</dd></div>
+        <div><dt><span class="chip chip-scenario">시나리오</span></dt><dd>테스트 코드·수동 시나리오로 동작만 확인</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="wrap" id="capability">
+    <div class="sec-head">
+      <h2>세 가지 축</h2>
+      <span class="en">Core</span>
+    </div>
+    <div>
+      <div class="cap">
+        <div class="cap-name">인증·세션<span>AUTH</span></div>
+        <p>
+          세션 기반 로그인부터 JWT 발급·회전, 탈취 의심 시 전체 무효화까지 두 프로젝트에서 인증 전 구간을 맡았습니다.
+          WebSocket 연결 시점의 토큰 검증과 권한 분리도 포함합니다.
+          <span class="src">MINGPARK · TOCKTALKS</span>
+        </p>
+      </div>
+      <div class="cap">
+        <div class="cap-name">동시성 제어<span>CONCURRENCY</span></div>
+        <p>
+          Redis Sorted Set 대기열로 예매 화면 진입 인원을 제어하고, 방 참여·상태 변경에는 비관적 락과 락 획득 후 재검증을 적용했습니다.
+          <span class="src">MINGPARK · TOCKTALKS</span>
+        </p>
+      </div>
+      <div class="cap">
+        <div class="cap-name">대용량 데이터<span>DATA PIPELINE</span></div>
+        <p>
+          회원 100만, 주문 1,000만 건 규모의 더미 데이터를 5단계 시더로 생성했습니다. 팀 전체가 같은 데이터 위에서 부하 테스트와 정합성 검증을 돌릴 수 있게 됐습니다.
+          <span class="src">Mealiver-IT</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="skills">
+    <div class="sec-head">
+      <h2>기술과 사용 맥락</h2>
+      <span class="en">Skills</span>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">기술</th><th scope="col">무엇을 했는지</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Java 21<br><span class="n">Spring Boot 4.x</span></td>
+            <td>도메인 단위 패키지 구조, REST API, 트랜잭션 경계 설계</td>
+          </tr>
+          <tr>
+            <td>Spring Security</td>
+            <td>HTTP 세션 로그인, JWT 발급·회전, Kakao OAuth2 연동, WebSocket 연결 인증, 관리자·일반 권한 분리</td>
+          </tr>
+          <tr>
+            <td>Redis</td>
+            <td>Sorted Set 대기열과 <code>ZRANK</code> 순번, Refresh 토큰 저장, 로그인 실패 카운터</td>
+          </tr>
+          <tr>
+            <td>MySQL<br><span class="n">JPA / Hibernate</span></td>
+            <td>엔티티·상태 enum 설계, 비관적 락, 청크 단위 배치 인서트</td>
+          </tr>
+          <tr>
+            <td>WebSocket<br><span class="n">STOMP</span></td>
+            <td>연결 핸드셰이크 시 토큰 검증, 방 단위 구독 경로 설계</td>
+          </tr>
+          <tr>
+            <td>Python<br><span class="n">Flask</span></td>
+            <td>ETA·경로 탐색 API 서버, 학습된 AI 모델 추론 연동</td>
+          </tr>
+          <tr>
+            <td>GCP</td>
+            <td>Ubuntu 인스턴스 환경 구성, 팀 공용 디렉터리·가상환경 권한 설정</td>
+          </tr>
+          <tr>
+            <td>Docker</td>
+            <td>로컬·팀 공용 DB 환경 컨테이너 구성</td>
+          </tr>
+          <tr>
+            <td>테스트<br><span class="n">JUnit 5 · k6</span></td>
+            <td>동시 요청 시나리오 검증, Testcontainers 기반 통합 테스트 환경 사용</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wrap" id="projects">
+    <div class="sec-head">
+      <h2>프로젝트</h2>
+      <span class="en">Projects</span>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">프로젝트</th><th scope="col">역할</th><th scope="col">기간</th><th scope="col">한 줄</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="#mingpark">MINGPARK</a></td>
+            <td class="n">인증·세션<br>대기열</td>
+            <td class="n">2026.06<br>~ 07</td>
+            <td>콘서트 예매 서비스. 오픈 직후 트래픽을 대기열로 흘려보내는 구조</td>
+          </tr>
+          <tr>
+            <td><a href="#tocktalks">TOCKTALKS</a></td>
+            <td class="n">Auth<br>Room</td>
+            <td class="n">2026.07</td>
+            <td>실시간 주가 기반 모의투자 대결·커뮤니티 서비스</td>
+          </tr>
+          <tr>
+            <td><a href="#mealiver">Mealiver-IT</a></td>
+            <td class="n">데이터<br>파이프라인</td>
+            <td class="n">2026.08</td>
+            <td>배달앱 선착순 쿠폰 발급 시스템. 재고 1만 / 동시 2만 요청 시나리오</td>
+          </tr>
+          <tr>
+            <td><a href="#eta">AI-BASED-ETA</a></td>
+            <td class="n">서버<br>경로 탐색</td>
+            <td class="n">2024.03<br>~ 06</td>
+            <td>VDS 교통 데이터로 학습한 모델을 쓰는 도착 시간 예측 서비스 (캡스톤)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── MINGPARK ─────────────────────── -->
+    <article class="project" id="mingpark">
+      <h2 class="p-title"><span class="tag">2026.06 – 07 · 콘서트 예매</span>MINGPARK</h2>
+      <p class="p-sub">공연 탐색부터 대기열 입장, 좌석 선점, 포인트 결제와 환불까지 하나의 흐름으로 묶은 예매 서비스입니다.</p>
+
+      <dl class="meta">
+        <dt>기간</dt><dd>2026.06.01 ~ 2026.07.07 (약 5주)</dd>
+        <dt>팀</dt><dd>3명 (백엔드)</dd>
+        <dt>내 역할</dt><dd><b>회원 인증·세션, Redis 대기열, 마이페이지</b></dd>
+        <dt>스택</dt><dd>Java 17 · Spring Boot · Spring Security · MySQL · Redis · JPA</dd>
+        <dt>저장소</dt><dd><a href="https://github.com/minggure/Mingpark">github.com/minggure/Mingpark ↗</a></dd>
+      </dl>
+
+      <div class="scope">
+        <h4>담당 범위</h4>
+        <ul>
+          <li>일반 회원가입·로그인과 세션 인증, 관리자/일반 권한 분리</li>
+          <li>콘서트별 대기열 등록·순번 조회·입장 허용 스케줄러</li>
+          <li>마이페이지: 예매 내역 조회, 공연 시작 전 환불</li>
+        </ul>
+      </div>
+
+      <div class="case">
+        <h3>대기열: 재요청해도 순번이 유지되도록 <span class="chip chip-scenario">시나리오</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>예매 오픈 직후 접속이 예매 화면으로 그대로 들어오면, 좌석 조회와 선점 요청이 한꺼번에 DB로 내려갑니다.</dd></div>
+          <div class="step"><dt>원인</dt><dd>입장 인원을 제어하는 장치가 없었고, 사용자가 순번을 다시 조회할 때마다 대기열에 재등록되어 순번이 뒤로 밀렸습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>
+            <code>queue:wait:concert:{concertId}</code> Sorted Set에 진입 시각을 score로 저장하고, 순번은 <code>ZRANK</code>로 조회했습니다.
+            이미 등록된 사용자는 다시 넣지 않으므로 재요청해도 <b>같은 순번을 유지</b>합니다.
+            <span class="num">1초</span> 주기 스케줄러가 콘서트별 활성 인원을 확인해 최대 <span class="num">50명</span>까지 입장을 허용하고,
+            입장자는 <code>queue:active:concert:{concertId}</code> Set으로 옮겨 <span class="num">5분</span> TTL을 부여했습니다.
+          </dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>예매 화면에 동시에 들어오는 인원이 50명으로 고정되고, 결제 완료·이탈 시 즉시 자리를 회수하도록 정리했습니다.</dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>
+            k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드만 확인했고 <b>결과 파일을 저장하지 않아 처리량·지연 개선 수치는 제시하지 않습니다.</b>
+            입장 허용 인원 50명도 서버 여력을 측정해서 정한 값이 아니라 시나리오상 정한 값입니다.
+          </dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>인증 주체가 둘로 늘어나며 생긴 NPE <span class="chip chip-scenario">시나리오</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>제가 세션 기반 로그인을 올린 뒤, 팀원이 Kakao OAuth2 로그인을 추가했습니다. 그 직후 제가 만든 마이페이지 API들에서 NPE가 발생했습니다.</dd></div>
+          <div class="step"><dt>원인</dt><dd>로그인 경로가 두 개로 갈라지면서 인증 주체의 형태가 달라졌는데, 기존 API는 한쪽 형태만 가정하고 인증 정보를 꺼냈습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>인증 정보를 꺼내는 지점을 한 곳으로 모아, 어느 경로로 로그인했는지와 무관하게 회원을 식별하도록 바꿨습니다. 콘서트 등록·포스터 업로드는 관리자 권한으로 제한했습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>두 로그인 경로가 같은 API를 공유할 수 있게 되었습니다.</dd></div>
+          <div class="step"><dt>배운 점</dt><dd>내 기능이 멀쩡해도 팀원이 인증 방식을 하나 더 붙이면 깨질 수 있다는 걸 겪었습니다. 이후 프로젝트에서는 인증 주체를 꺼내는 통로를 처음부터 하나로 두었습니다.</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- ── TOCKTALKS ────────────────────── -->
+    <article class="project" id="tocktalks">
+      <h2 class="p-title"><span class="tag">2026.07 · 실시간 모의투자</span>TOCKTALKS</h2>
+      <p class="p-sub">같은 시드머니로 방을 만들어 정해진 시간 동안 수익률을 겨루고, 인증된 투자 카드를 커뮤니티에 공유하는 서비스입니다. 실시간 주가는 KIS Open API에서 받아옵니다.</p>
+
+      <dl class="meta">
+        <dt>기간</dt><dd>2026.07.16 ~ 2026.07.27 (2주)</dd>
+        <dt>팀</dt><dd>5명 (백엔드)</dd>
+        <dt>내 역할</dt><dd><b>Auth, Room</b> — 인증 전 구간과 방 참여·대결 로직</dd>
+        <dt>스택</dt><dd>Java 21 · Spring Boot 4.1 · Spring Security · JWT · Redis · MySQL · WebSocket/STOMP</dd>
+        <dt>저장소</dt><dd><a href="https://github.com/TockTalks/ureca_TockTalks">github.com/TockTalks/ureca_TockTalks ↗</a></dd>
+      </dl>
+
+      <div class="scope">
+        <h4>담당 범위</h4>
+        <ul>
+          <li>자체 회원가입·로그인(BCrypt)과 Kakao OAuth2 소셜 로그인</li>
+          <li>Access/Refresh 토큰 발급·재발급·폐기, WebSocket 연결 시점 인증</li>
+          <li>방 생성·참여와 대결 진행 로직</li>
+        </ul>
+      </div>
+
+      <div class="case">
+        <h3>Refresh 토큰을 1회용으로 회전시키고, 재사용을 탈취 신호로 처리 <span class="chip chip-scenario">시나리오</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>Access 토큰은 만료되면 재발급해야 합니다. 그런데 Refresh 토큰을 유효기간 내내 그대로 쓰면, 한 번 유출된 토큰이 14일 동안 살아 있습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>
+            Access는 <span class="num">1시간</span>, Refresh는 <span class="num">14일</span>로 두고 Refresh를 Redis에 저장했습니다.
+            재발급 때마다 Refresh를 <b>1회용으로 회전</b>시키고, 이미 회전된 토큰이 다시 들어오면
+            <b>해당 계정의 토큰을 모두 선제적으로 무효화</b>하도록 했습니다.
+          </dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>탈취가 의심되는 상황을 "이미 쓴 토큰이 또 들어왔다"는 시점에 잡아 차단합니다. 로그아웃·회원 탈퇴 시에도 즉시 전체 폐기합니다.</dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>정상 사용자가 네트워크 재시도로 같은 Refresh를 두 번 보내면 전체 무효화로 이어질 수 있습니다. 재시도와 실제 탈취를 구분하는 유예 처리는 넣지 못했습니다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>로그인 실패 잠금과, Redis가 죽어도 로그인은 막히지 않게 <span class="chip chip-scenario">시나리오</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>비밀번호 대입 시도를 막아야 하지만, 잠금 카운터를 서버 메모리에 두면 재시작 때 초기화되고 인스턴스마다 값이 갈립니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>실패 횟수를 Redis 공용 카운터로 관리해 <span class="num">5회</span> 실패 시 <span class="num">5분</span> 잠금을 적용했습니다. 동시에 인증 검사에는 <b>fail-open</b>을 적용해, Redis 장애 시 잠금 검사를 건너뛰고 로그인 자체는 되도록 했습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>인스턴스 재시작에도 잠금 상태가 유지되고, 캐시 장애가 로그인 전면 차단으로 번지지 않습니다.</dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>fail-open은 가용성을 택한 대신 장애 중에는 대입 방어가 열립니다. 어느 쪽을 택할지는 서비스 성격에 따라 다시 판단해야 한다고 봅니다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>JWT 시크릿 기본값 제거 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>개발 편의로 넣어둔 JWT 시크릿 기본값이 설정에 남아 있었습니다. 환경변수를 안 넣어도 서버가 떠버리는 상태였습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>기본값을 제거하고 <code>JWT_SECRET</code> 환경변수를 필수로 바꿔, 값이 없으면 <b>서버 부팅이 실패</b>하도록 했습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>플레이스홀더 시크릿이 그대로 배포될 경로를 막았습니다. 설정 누락은 런타임이 아니라 부팅 시점에 드러납니다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>방 참여 경합: 락을 잡고 나서 다시 검사 <span class="chip chip-scenario">시나리오</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>정원이 찬 방이나 이미 시작된 방에 여러 사용자가 동시에 참여 요청을 보내면, 검사와 반영 사이에 상태가 바뀔 수 있습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>방 상태 변경 구간에 비관적 락을 적용하고, <b>락을 획득한 뒤 참여 조건을 다시 검사</b>했습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>락을 기다린 요청은 바뀐 상태를 보고 판단하므로, 정원을 넘겨 참여하는 경로가 막혔습니다.</dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>방 단위 락이라 같은 방의 참여 요청은 직렬화됩니다. 대규모 인원을 받는 방이 생기면 참여 큐 분리를 고민해야 합니다.</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- ── Mealiver-IT ──────────────────── -->
+    <article class="project" id="mealiver">
+      <h2 class="p-title"><span class="tag">2026.08 · 선착순 쿠폰</span>Mealiver-IT</h2>
+      <p class="p-sub">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다. 재고 1만 개에 동시 요청 2만 건이 들어와도 초과 발급 0과 1인 1매를 지키는 것이 목표였습니다.</p>
+
+      <dl class="meta">
+        <dt>기간</dt><dd>2026.08.06 ~ (2주)</dd>
+        <dt>팀</dt><dd>6명</dd>
+        <dt>내 역할</dt><dd><b>데이터·더미 파이프라인</b> — 검증용 데이터셋 생성</dd>
+        <dt>스택</dt><dd>Java 21 · Spring Boot · MySQL 8.0 · Flyway · JDBC 배치 · Docker</dd>
+        <dt>저장소</dt><dd><a href="https://github.com/Mealiver-IT/Mealiver-IT-BE">github.com/Mealiver-IT/Mealiver-IT-BE ↗</a></dd>
+      </dl>
+
+      <div class="scope">
+        <h4>담당 범위</h4>
+        <ul>
+          <li>회원·주문·등급·캠페인·발급 이력을 순서대로 채우는 5단계 시더 체인</li>
+          <li>대량 인서트 성능 확보 (청크 배치, JDBC 옵션)</li>
+        </ul>
+      </div>
+
+      <div class="case">
+        <h3>부하 테스트가 의미를 가지려면 데이터가 먼저 있어야 했습니다 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>초과 발급과 중복 발급은 데이터가 쌓인 상태에서만 드러납니다. 빈 테이블에 요청을 쏘면 인덱스도 락 경합도 실제와 다르게 동작합니다.</dd></div>
+          <div class="step"><dt>원인</dt><dd>등급·주문 이력에 의존하는 발급 조건이 있어, 회원만 만들어서는 조건 분기를 태울 수 없었습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>
+            회원 → 주문 → 등급 → 캠페인 → 발급 이력 순서로 의존성을 따라가는 <b>5단계 시더 체인</b>을 만들었습니다.
+            전체를 한 트랜잭션에 담지 않고 청크 단위 배치 인서트로 끊고,
+            <code>rewriteBatchedStatements=true</code>로 네트워크 왕복을 줄였습니다.
+          </dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>
+            가상 회원 <span class="num">100만</span>, 주문 <span class="num">1,000만</span>, 발급 이력 약 <span class="num">300만</span> 건의 데이터셋을 구성해,
+            팀원 전원이 같은 규모·같은 분포 위에서 검증을 돌릴 수 있게 했습니다.
+          </dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>시더 실행 시간을 단계별로 기록해두지 않아 배치 옵션이 얼마나 기여했는지는 수치로 말할 수 없습니다. 다음에는 단계별 소요 시간부터 남기겠습니다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>이 데이터로 팀이 확인한 것 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>범위</dt><dd>아래 부하 테스트는 팀원(부하 테스트 담당)이 수행했고, 제가 만든 데이터셋 위에서 돌아갔습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>
+            재고 <span class="num">100</span>개에 동시 요청 <span class="num">50</span>건 리허설에서 초과 발급 0, 요청 50건 모두 정상 발급.
+            동일 <code>Idempotency-Key</code>로 같은 요청을 <span class="num">100</span>회 보냈을 때 신규 발급 1건 + 이미 처리됨 99건.
+          </dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>2만 유저 스케일 테스트는 로컬 TCP 소켓 한계로 재실행 대기 상태입니다. 목표 수치(2만 동시 요청)는 아직 달성 기록이 아니라 시나리오입니다.</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- ── AI-BASED-ETA ─────────────────── -->
+    <article class="project" id="eta">
+      <h2 class="p-title"><span class="tag">2024.03 – 06 · 세종대 캡스톤</span>AI-BASED-ETA</h2>
+      <p class="p-sub">한국도로교통공사 공공데이터의 VDS 데이터로 학습한 모델을 써서, 출발 시각에 따라 달라지는 도착 시간과 최단 시간 경로를 계산하는 서비스입니다.</p>
+
+      <dl class="meta">
+        <dt>기간</dt><dd>2024.03 ~ 2024.06 (4개월) · 세종대학교 캡스톤</dd>
+        <dt>팀</dt><dd>4명</dd>
+        <dt>내 역할</dt><dd><b>GCP 서버 구축·배포, 동적 가중치 A* 설계, AI 모델 연동</b></dd>
+        <dt>스택</dt><dd>Python 3.6 · Flask · Graph WaveNet · GCP (Ubuntu) · 카카오맵</dd>
+        <dt>저장소</dt><dd><a href="https://github.com/AI-based-ETA/GCP-Server">github.com/AI-based-ETA/GCP-Server ↗</a> · <a href="https://github.com/AI-based-ETA">조직 전체 ↗</a></dd>
+      </dl>
+
+      <div class="scope">
+        <h4>담당 범위</h4>
+        <ul>
+          <li><b>AI 모델이 예측한 속도를 간선 가중치로 쓰는 동적 A* 알고리즘 설계·구현</b> (같은 도로라도 도착 시각이 달라지면 가중치가 바뀝니다)</li>
+          <li>Flask API 서버 구현: <code>/find_path</code>, <code>/get-node-info</code></li>
+          <li>학습된 모델 추론 연동 (예측 요청 → 속도 시간표 → 경로 계산)</li>
+          <li><b>GCP 인스턴스에 서버 구축·배포</b>, Python 버전 정렬과 팀 공용 가상환경 권한 구성</li>
+        </ul>
+      </div>
+
+      <div class="case">
+        <h3>모델이 60분까지만 예측하는데, 경로는 4시간이었습니다 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>서울→부산처럼 긴 경로는 이동 중에 도로 상황이 바뀝니다. 출발 시각의 속도로 끝까지 계산하면 뒤쪽 구간이 전부 틀어집니다.</dd></div>
+          <div class="step"><dt>원인</dt><dd>사용한 Graph WaveNet은 5분 간격 12스텝, <span class="num">60분</span>까지만 예측합니다. 그 뒤 구간의 속도는 아예 데이터가 없었습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>
+            경로를 따라가며 누적 시각을 계산하고, 누적 시각이 마지막 예측 요청 시점으로부터 <span class="num">1시간 5분</span>을 넘어가면
+            <b>그 시점을 기준으로 속도 예측을 다시 요청</b>하는 Sliding Window 방식을 넣었습니다.
+            A*의 휴리스틱은 목적지까지의 위경도 유클리드 거리, 간선 비용은 <b>그 시각의 예측 속도로 계산한 소요 시간</b>(거리÷속도)입니다.
+            가중치가 고정된 그래프가 아니라, 탐색이 진행돼 시각이 흐르면 같은 간선의 비용도 달라지는 구조입니다.
+          </dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>
+            서울시청→인천시청 <span class="num">55분</span>, 서울→부산 <span class="num">4시간 10분</span>(예측 <span class="num">5회</span> 연속 호출)으로 경로와 ETA를 산출했습니다.
+          </dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>예측 지평이 길어질수록 정확도가 떨어집니다. 교통 예측 모델의 공통 한계이고, 저희도 해결하지 못했습니다. 검증도 네이버 지도와의 단순 비교 수준이었습니다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>팀 전원이 같은 서버에서 모델을 돌릴 수 있게</h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>학습 환경은 Python 3.6, GCP Ubuntu 20.04 기본은 3.8이라 모델 로딩부터 실패했습니다. 팀원들이 각자 환경을 만들면 재현이 안 됐습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>인스턴스의 Python을 학습 환경과 같은 버전으로 맞추고, 공용 디렉터리를 <code>chmod 2775</code>와 그룹 소유로 두어 팀원 모두가 같은 가상환경을 쓰도록 구성했습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>"내 로컬에서는 됩니다"가 사라졌습니다. 모델 파일과 추론 코드를 한 경로에서 공유했습니다.</dd></div>
+        </dl>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap" id="record">
+    <div class="sec-head">
+      <h2>경력 · 학력 · 자격</h2>
+      <span class="en">Record</span>
+    </div>
+    <div>
+      <div class="rec">
+        <div class="rec-when">2026.04 – 10<b>진행 중</b></div>
+        <div class="rec-what">
+          <strong>[LG유플러스] 유레카 SW교육과정 4기<em>부트캠프</em></strong>
+          <p>백엔드 과정 (2026.04.06 ~ 2026.10.28). MINGPARK · TOCKTALKS · Mealiver-IT 세 개의 팀 프로젝트를 연속으로 수행했습니다.</p>
+        </div>
+      </div>
+      <div class="rec">
+        <div class="rec-when">2019.02 – 2026.02<b>졸업</b></div>
+        <div class="rec-what">
+          <strong>세종대학교 컴퓨터공학과</strong>
+          <p>학점 3.68 / 4.5</p>
+        </div>
+      </div>
+      <div class="rec">
+        <div class="rec-when">2020.09 – 2025.04<b>3년 3개월</b></div>
+        <div class="rec-what">
+          <strong>클라우드시큐리티 주식회사<em>경영지원</em></strong>
+          <ul>
+            <li>헬프데스크 운영 관리 보조, 사내 지원 요청 대응</li>
+            <li>IT 유·무형 자산 관리와 전산 자산 내부 컴플라이언스 대응</li>
+            <li>신규 입사자 온보딩 지원, 공용 공간·비품 관리</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rec">
+        <div class="rec-when">2024 – 2026<b>자격·어학</b></div>
+        <div class="rec-what">
+          <strong>SQLD · 정보처리기사 · TOEIC</strong>
+          <ul>
+            <li><b>SQLD</b> (SQL 개발자) · 2026.09 합격 · 한국데이터산업진흥원</li>
+            <li><b>정보처리기사</b> · 2025.06 · 한국산업인력공단</li>
+            <li><b>TOEIC 745</b> · 2024.11</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rec">
+        <div class="rec-when">재학 중</div>
+        <div class="rec-what">
+          <strong>세종대학교 중앙동아리 인터페이스<em>코딩 동아리</em></strong>
+          <p>기장을 맡아 프로그래밍 전시회에 참여하고, 비전공자·문과생을 위한 정기 스터디를 개설해 운영했습니다.</p>
+        </div>
+      </div>
+      <div class="rec">
+        <div class="rec-when">상시</div>
+        <div class="rec-what">
+          <strong>알고리즘 · 학습 기록</strong>
+          <p>백준 풀이는 <a href="https://github.com/YunTaeng/daily-algo">daily-algo</a>, 학습 기록은 <a href="https://github.com/YunTaeng/Daily-Learning">Daily-Learning</a>에 남기고 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <div class="foot-links">
+      <a href="mailto:howard9166@naver.com">howard9166@naver.com</a>
+      <a href="https://github.com/YunTaeng">GitHub ↗</a>
+      <a href="#top">맨 위로 ↑</a>
+    </div>
+    <p class="foot-note">
+      이 페이지의 수치는 저장소 문서와 실행 기록에서 확인한 값만 적었습니다. 본문 서체는 Gmarket Sans입니다.
+    </p>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".sidenav a"));
+    if (!links.length) return;
+    var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+    var queued = false;
+
+    function update() {
+      queued = false;
+      var active = 0;
+      for (var i = 0; i < targets.length; i++) {
+        if (targets[i] && targets[i].getBoundingClientRect().top <= 140) active = i;
+      }
+      var atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 4;
+      if (atBottom) active = links.length - 1;
+      for (var j = 0; j < links.length; j++) {
+        if (j === active) links[j].setAttribute("aria-current", "true");
+        else links[j].removeAttribute("aria-current");
+      }
+    }
+    function onScroll() {
+      if (!queued) { queued = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  })();
+</script>
