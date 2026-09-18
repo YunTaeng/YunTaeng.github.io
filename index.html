@@ -470,7 +470,6 @@
           <div class="step"><dt>원인</dt><dd>로그인 경로가 두 개로 갈라지면서 인증 주체의 형태가 달라졌는데, 기존 API는 한쪽 형태만 가정하고 인증 정보를 꺼냈습니다.</dd></div>
           <div class="step"><dt>조치</dt><dd>인증 정보를 꺼내는 지점을 한 곳으로 모아, 어느 경로로 로그인했는지와 무관하게 회원을 식별하도록 바꿨습니다. 콘서트 등록·포스터 업로드는 관리자 권한으로 제한했습니다.</dd></div>
           <div class="step is-result"><dt>결과</dt><dd>두 로그인 경로가 같은 API를 공유할 수 있게 되었습니다.</dd></div>
-          <div class="step"><dt>배운 점</dt><dd>내 기능이 멀쩡해도 팀원이 인증 방식을 하나 더 붙이면 깨질 수 있다는 걸 겪었습니다. 이후 프로젝트에서는 인증 주체를 꺼내는 통로를 처음부터 하나로 두었습니다.</dd></div>
         </dl>
       </div>
     </article>
@@ -657,14 +656,6 @@
         </dl>
       </div>
 
-      <div class="case">
-        <h3>팀 전원이 같은 서버에서 모델을 돌릴 수 있게</h3>
-        <dl class="steps">
-          <div class="step"><dt>상황</dt><dd>학습 환경은 Python 3.6, GCP Ubuntu 20.04 기본은 3.8이라 모델 로딩부터 실패했습니다. 팀원들이 각자 환경을 만들면 재현이 안 됐습니다.</dd></div>
-          <div class="step"><dt>조치</dt><dd>인스턴스의 Python을 학습 환경과 같은 버전으로 맞추고, 공용 디렉터리를 <code>chmod 2775</code>와 그룹 소유로 두어 팀원 모두가 같은 가상환경을 쓰도록 구성했습니다.</dd></div>
-          <div class="step is-result"><dt>결과</dt><dd>"내 로컬에서는 됩니다"가 사라졌습니다. 모델 파일과 추론 코드를 한 경로에서 공유했습니다.</dd></div>
-        </dl>
-      </div>
     </article>
   </section>
 
