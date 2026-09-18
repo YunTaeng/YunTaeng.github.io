@@ -26,7 +26,7 @@
 
     --sans: "GmarketSans", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
 
-    --col: 45rem;
+    --col: 52rem;
     --rail: 9.2rem;
     color-scheme: light;
 
@@ -91,11 +91,12 @@
   .sidenav a[aria-current="true"] { color: var(--accent); border-left-color: var(--accent); font-weight: 700; }
   .sidenav .sub a { padding-left: 1.5rem; font-size: 0.84rem; }
 
-  @media (min-width: 1140px) {
+  /* 사이드바는 본문 칼럼 왼쪽 바깥에 붙는다. --col을 바꾸면 따라 움직인다 */
+  @media (min-width: 1250px) {
     .sidenav {
       display: block;
       position: fixed; top: 50%; transform: translateY(-50%);
-      left: calc(50% - 22.5rem - 11.5rem);
+      left: calc(50% - (var(--col) / 2) - 11.5rem);
       width: 10.5rem; z-index: 9;
     }
     .topnav .anchor { display: none; }
@@ -154,7 +155,10 @@
   th, td { text-align: left; vertical-align: top; padding: 0.65rem 0.7rem 0.65rem 0; border-bottom: 1px solid var(--rule); }
   th { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
   td:first-child { white-space: nowrap; padding-right: 1.4rem; }
-  td .n { color: var(--ink-2); font-size: 0.88rem; }
+  /* 역할·기간 칸은 td 자체에 .n이 붙고, 기술표는 td 안 span에 붙는다 */
+  td.n, td .n { color: var(--ink-2); font-size: 0.88rem; }
+  /* <br>로 끊은 자리에서만 줄을 바꾼다. 중간에 끊기면 "대기열·좌석 / 락"처럼 읽힌다 */
+  td.n { white-space: nowrap; }
 
   /* ── project detail ──────────────────── */
   .project { padding-block: 3rem 1rem; border-top: 1px solid var(--rule); }
