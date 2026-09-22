@@ -33,12 +33,12 @@
 
     --sans: "Freesentation", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
 
-    --col: 46rem;
+    --col: 48rem;
     --rail: 9.2rem;
     color-scheme: light;
 
     /* 전체 글자 크기 기준점. 모든 rem이 여기에 걸리므로 이 값만 조절하면 된다 */
-    font-size: 19.4px;
+    font-size: 20.4px;
   }
 
   * { box-sizing: border-box; }
@@ -100,12 +100,12 @@
   .sidenav .sub a { padding-left: 1.5rem; font-size: 0.84rem; }
 
   /* 사이드바는 본문 칼럼 왼쪽 바깥에 붙는다. --col을 바꾸면 따라 움직인다 */
-  @media (min-width: 1360px) {
+  @media (min-width: 1410px) {
     .sidenav {
       display: block;
       position: fixed; top: 50%; transform: translateY(-50%);
-      left: calc(50% - (var(--col) / 2) - 11.5rem);
-      width: 10.5rem; z-index: 9;
+      left: calc(50% - (var(--col) / 2) - 10rem);
+      width: 9rem; z-index: 9;
     }
     .topnav .anchor { display: none; }
   }
@@ -163,6 +163,8 @@
   th, td { text-align: left; vertical-align: top; padding: 0.65rem 0.7rem 0.65rem 0; border-bottom: 1px solid var(--rule); }
   th { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
   td:first-child { white-space: nowrap; padding-right: 1.4rem; }
+  /* 기술 이름과 설명이 붙어 보여 이 표만 간격을 더 준다 */
+  #skills th:first-child, #skills td:first-child { padding-right: 3rem; }
   /* 역할·기간 칸은 td 자체에 .n이 붙고, 기술표는 td 안 span에 붙는다 */
   td.n, td .n { color: var(--ink-2); font-size: 0.88rem; }
   /* <br>로 끊은 자리에서만 줄을 바꾼다. 중간에 끊기면 "대기열·좌석 / 락"처럼 읽힌다 */
@@ -305,13 +307,6 @@
       돌아가는 코드와 운영할 수 있는 코드는 다르다는 걸 그때 봤고 그 차이를 전제로 개발합니다.
     </p>
 
-    <div class="legend">
-      <p><b>측정하지 않은 성능 수치는 이 페이지에 쓰지 않았습니다.</b> 대신 각 결과를 어디까지 확인했는지 표기했습니다.</p>
-      <dl>
-        <div><dt><span class="chip chip-measured">측정됨</span></dt><dd>실행 결과나 저장된 기록으로 확인한 값</dd></div>
-        <div><dt><span class="chip chip-scenario">시나리오</span></dt><dd>테스트 코드·수동 시나리오로 동작만 확인</dd></div>
-      </dl>
-    </div>
   </header>
 
   <section class="wrap" id="capability">
@@ -436,6 +431,14 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="legend">
+      <p><b>측정하지 않은 성능 수치는 이 페이지에 쓰지 않았습니다.</b> 아래 사례마다 결과를 어디까지 확인했는지 표기했습니다.</p>
+      <dl>
+        <div><dt><span class="chip chip-measured">측정됨</span></dt><dd>실행 결과나 저장된 기록으로 확인한 값</dd></div>
+        <div><dt><span class="chip chip-scenario">시나리오</span></dt><dd>테스트 코드·수동 시나리오로 동작만 확인</dd></div>
+      </dl>
     </div>
 
     <!-- ── MINGPARK ─────────────────────── -->
@@ -571,12 +574,13 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
         <img src="assets/mealiver-logo.png" alt="Mealiver-IT 로고" width="256" height="256" loading="lazy">
       </figure>
       <h2 class="p-title"><span class="tag">2026.08 · 선착순 쿠폰</span>Mealiver-IT</h2>
-      <p class="p-sub">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다. 재고 1만 개에 동시 요청 2만 건이 들어와도 초과 발급 0과 1인 1매를 지키는 것이 목표였습니다.</p>
+      <p class="p-sub">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다.<br>
+        <b>재고 <span class="num">1만</span> 개에 동시 요청 <span class="num">2만</span> 건이 들어와도 초과 발급 0과 1인 1매를 지키는 것</b>이 목표였습니다.</p>
 
       <dl class="meta">
         <dt>기간</dt><dd>2026.08.06 ~ 2026.08.31 (약 4주)</dd>
         <dt>팀</dt><dd>6명</dd>
-        <dt>내 역할</dt><dd><b>데이터 파이프라인, 정합성 검증, 등급 배치</b> — 검증용 데이터셋과 그 데이터를 검사하는 쿼리까지 (커밋 80건)</dd>
+        <dt>내 역할</dt><dd><b>설계 문서 관리, 정합성 검증, 데이터 파이프라인, 등급 배치</b></dd>
         <dt>스택</dt><dd>Java 21 · Spring Boot · MySQL 8.0 · Flyway · JDBC 배치 · Docker</dd>
         <dt>저장소</dt><dd><a href="https://github.com/Mealiver-IT/Mealiver-IT-BE">github.com/Mealiver-IT/Mealiver-IT-BE ↗</a></dd>
       </dl>
@@ -584,12 +588,27 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
       <div class="scope">
         <h4>담당 범위</h4>
         <ul>
-          <li><b>5단계 시더 체인</b> — 발급 조건이 등급과 주문 이력에 걸려 있어 회원만 만들어서는 조건 분기를 태울 수 없었습니다. 회원·주문·등급·캠페인·발급 이력을 의존성 순서대로 채우는 쪽으로 잡았습니다. 수백만 건을 넣다 끊기면 처음부터 다시 돌려야 하니 <b>재개 기능</b>을 먼저 넣고 시작했습니다.</li>
-          <li><b>대량 인서트 성능</b> — 전체를 한 트랜잭션에 담으면 끝까지 가지 못합니다. 청크 단위로 끊고 네트워크 왕복은 JDBC 배치 옵션으로 줄였습니다.</li>
+          <li><b>설계 문서 관리</b> — 초과 발급을 막는 전략이 회의와 멘토링을 거치며 계속 바뀌었습니다. 그때마다 결정과 그 이유를 <b>아키텍처 문서와 버전 사다리 문서에 반영해 팀이 같은 기준을 보게</b> 했습니다.</li>
+          <li><b>시더와 대량 적재</b> — 발급 조건이 등급과 주문 이력에 걸려 있어 회원만 만들어서는 조건 분기를 태울 수 없었습니다. 의존성 순서대로 채우는 5단계 시더를 만들었습니다. 수백만 건을 넣다 끊기면 처음부터 다시 돌려야 하니 <b>재개 기능</b>을 먼저 넣었습니다. 적재는 청크 단위로 끊고 JDBC 배치 옵션으로 왕복을 줄였습니다.</li>
           <li><b>정합성 검증 체계</b> — 초과 발급·중복 발급을 잡는 검증 SQL 6종을 만들었습니다. 그런데 위반이 없는 데이터에서는 쿼리가 통과해도 아무것도 증명하지 못합니다. <b>일부러 틀린 데이터를 넣고 지우는 API를 붙여 검증 쿼리 자체를 먼저 검증했습니다.</b></li>
-          <li><b>등급 산정 배치</b> — 주문 이력으로 회원 등급을 매기는 배치 잡을 구현했고 한 건씩 UPDATE하던 것을 <code>CASE WHEN</code> 청크 방식으로 바꿨습니다. 그 과정에서 <b>팀 문서에 평문으로 남아 있던 원격 DB 비밀번호를 발견해 제거했습니다.</b></li>
+          <li><b>등급 산정 배치</b> — 주문 이력으로 회원 등급을 매기는 배치 잡을 구현했고 한 건씩 UPDATE하던 것을 <code>CASE WHEN</code> 청크 방식으로 바꿨습니다.</li>
           <li>제 작업의 목표는 <b>팀 전원이 같은 규모·같은 분포의 데이터 위에서 검증하게 만드는 것</b>이었습니다. 부하 테스트 실행 자체는 다른 팀원이 맡았고 제가 만든 데이터셋과 검증 쿼리 위에서 돌아갔습니다.</li>
         </ul>
+      </div>
+
+      <div class="case">
+        <h3>전략이 하루에도 두 번 바뀌는 동안 문서를 따라가게 했습니다</h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>6인이 2주를 쓰는 프로젝트였고 초과 발급을 막는 전략이 회의와 멘토링마다 바뀌었습니다. 버전 사다리가 V1~V4에서 V1~V3으로 줄었다가 같은 날 저녁에 다시 V4가 붙은 적도 있습니다.</dd></div>
+          <div class="step"><dt>원인</dt><dd>결정은 회의에서 나는데 그 결정이 문서에 안 들어가면 각자 다른 시점의 요구사항을 보고 만들게 됩니다. 이미 접은 설계를 누가 계속 붙잡고 있어도 아무도 모릅니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>
+            회의와 멘토링에서 나온 결정을 그날 아키텍처 문서와 버전 사다리 문서에 반영했습니다.
+            바꾼 내용만 적지 않고 <b>날짜와 함께 왜 바꿨는지를 남겼습니다.</b>
+            접은 설계도 지우지 않고 git 이력에 남겨, 나중에 "왜 그건 안 썼냐"는 질문에 답할 수 있게 뒀습니다.
+          </dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>팀이 한 문서를 보고 움직였습니다. 구현 담당자가 그 문서만 읽어도 각 버전이 무엇을 증명해야 하는지 알 수 있는 상태를 유지하는 것이 목표였습니다.</dd></div>
+          <div class="step"><dt>내 범위</dt><dd><b>설계 자체는 팀 회의와 멘토링에서 나온 결과입니다.</b> 저는 그것을 종합해 문서로 유지했습니다. 재고 샤딩 구현과 부하 테스트 실행은 다른 팀원이 맡았습니다.</dd></div>
+        </dl>
       </div>
 
       <div class="case">
