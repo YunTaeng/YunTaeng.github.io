@@ -176,8 +176,11 @@
   .project { counter-increment: proj; padding-block: 3.4rem 1.5rem; border-top: 2px solid var(--ink); }
   .project::before {
     content: "PROJECT " counter(proj, decimal-leading-zero);
-    display: block; margin-bottom: 1.2rem;
-    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
+    /* fit-content라야 밑줄이 글자 폭에만 붙는다. block이 아니면 뒤의 로고와 한 줄에 선다 */
+    display: block; width: fit-content;
+    margin-bottom: 1.7rem; padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    font-size: 1.12rem; font-weight: 700; letter-spacing: 0.16em;
     color: var(--accent);
   }
   .p-title { font-size: clamp(1.26rem, 3.8vw, 1.52rem); margin: 0 0 0.5rem; line-height: 1.35; letter-spacing: 0.01em; }
