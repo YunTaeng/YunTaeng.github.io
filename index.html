@@ -269,7 +269,7 @@
 <nav class="sidenav" aria-label="목차">
   <ul>
     <li><a href="#top">소개</a></li>
-    <li><a href="#capability">세 가지 축</a></li>
+    <li><a href="#capability">네 가지 축</a></li>
     <li><a href="#skills">기술</a></li>
     <li><a href="#projects">프로젝트</a></li>
     <li class="sub"><a href="#mingpark">MINGPARK</a></li>
@@ -297,12 +297,12 @@
 
     <h1>요청이 한꺼번에 몰리는 자리를 맡아 왔습니다.</h1>
     <p class="lede">
-      티켓 예매 대기열, 실시간 모의투자 서비스의 인증, 선착순 쿠폰 시스템의 데이터 파이프라인.
-      최근 네 개의 팀 프로젝트에서 제가 맡은 범위는 모두 <b>동시에 들어온 요청이 서로를 덮어쓰지 않게 만드는 쪽</b>이었습니다.
+      티켓 예매 대기열, 실시간 모의투자 서비스의 인증, 선착순 쿠폰 시스템의 데이터 파이프라인, 이벤트 응모권의 정합성 검증.
+      최근 다섯 개의 팀 프로젝트에서 제가 맡은 범위는 모두 <b>동시에 들어온 요청이 서로를 덮어쓰지 않게 만드는 쪽</b>이었습니다.
     </p>
     <p class="lede">
       <b>Java와 Spring Boot</b>로 서버를 만듭니다. 인증은 Spring Security, 대기열과 토큰 저장은 Redis,
-      데이터는 MySQL과 JPA로 다뤘고 동시 요청 검증에는 JUnit과 k6를 썼습니다.
+      데이터는 MySQL과 JPA로 다뤘고 동시 요청 검증에는 JUnit, k6, Locust를 썼습니다.
       캡스톤에서는 Python·Flask로 경로 탐색 API를 만들었습니다.
     </p>
     <p class="lede">
@@ -314,7 +314,7 @@
 
   <section class="wrap" id="capability">
     <div class="sec-head">
-      <h2>세 가지 축</h2>
+      <h2>네 가지 축</h2>
       <span class="en">Core</span>
     </div>
     <div>
@@ -342,6 +342,15 @@
           <span class="src">Mealiver-IT</span>
         </p>
       </div>
+      <div class="cap">
+        <div class="cap-name">정합성 검증<span>INTEGRITY</span></div>
+        <p>
+          응모권은 돈처럼 다뤄야 한다는 과제 조건에서, 코드를 짜기 전에 깨지면 안 되는 규칙 여덟 개부터 적고 SQL로 전수 검사했습니다.
+          보호 장치를 하나씩 빼서 정말 깨지는지 보고, 스테이징 서버 두 대에서 마감 직전 폭주를 세 번 쟀습니다.
+          위반 0건은 "이번 관측에서"의 결과이고 결함이 없다는 증명은 아니라는 것까지 적었습니다.
+          <span class="src">GETDDO</span>
+        </p>
+      </div>
     </div>
   </section>
 
@@ -366,11 +375,11 @@
           </tr>
           <tr>
             <td>Redis</td>
-            <td>Sorted Set 대기열과 <code>ZRANK</code> 순번, Refresh 토큰 저장, 로그인 실패 카운터</td>
+            <td>Sorted Set 대기열과 <code>ZRANK</code> 순번, Refresh 토큰 저장, 로그인 실패 카운터, 서버 여러 대가 공유하는 요청 빈도 제한(Lua 스크립트)과 장애 시 통과 처리</td>
           </tr>
           <tr>
             <td>MySQL<br><span class="n">JPA / Hibernate</span></td>
-            <td>엔티티·상태 enum 설계, 비관적 락, 청크 단위 배치 인서트</td>
+            <td>엔티티·상태 enum 설계, 비관적 락, 청크 단위 배치 인서트, 잠금 순서 설계와 교착 로그로 원인 확인, Flyway 마이그레이션</td>
           </tr>
           <tr>
             <td>WebSocket<br><span class="n">STOMP</span></td>
@@ -389,8 +398,8 @@
             <td>로컬 개발 환경의 MySQL·Redis 컨테이너 구동, 팀 공용 DB·Redis 접속 프로필 분리</td>
           </tr>
           <tr>
-            <td>테스트<br><span class="n">JUnit 5 · k6</span></td>
-            <td>담당 도메인(방 참여·탈퇴, 회원 탈퇴)의 서비스 테스트 작성, 예매 대기열 중복 요청 시나리오를 부하 스크립트로 확인</td>
+            <td>테스트<br><span class="n">JUnit 5 · k6<br>Testcontainers · Locust</span></td>
+            <td>담당 도메인(방 참여·탈퇴, 회원 탈퇴)의 서비스 테스트 작성, 예매 대기열 중복 요청 시나리오를 부하 스크립트로 확인, 실제 MySQL에서 도는 동시성 통합 테스트, 스테이징 서버 시험 시나리오 설계와 DB 대조</td>
           </tr>
         </tbody>
       </table>
@@ -425,6 +434,12 @@
             <td class="n">데이터·시더<br>정합성 검증</td>
             <td class="n">2026.08</td>
             <td>배달앱 선착순 쿠폰 발급 시스템. 재고 1만 / 동시 2만 요청 시나리오</td>
+          </tr>
+          <tr>
+            <td><a href="#getddo">GETDDO</a></td>
+            <td class="n">응모권·출석·미션·응모<br>정합성 검증</td>
+            <td class="n">2026.09<br>~ 10</td>
+            <td>이벤트 응모·추첨 플랫폼. 마감 직전에 몰려도 마감 뒤 확정 0건을 지키는 것이 목표</td>
           </tr>
           <tr>
             <td><a href="#eta">AI-BASED-ETA</a></td>
@@ -645,6 +660,104 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
       </div>
     </article>
 
+    <!-- ── GETDDO ─────────────────────── -->
+    <article class="project" id="getddo">
+      <h2 class="p-title"><span class="tag">2026.09 – 10 · 이벤트 응모·추첨</span>GETDDO</h2>
+      <p class="p-sub">출석·미션·게임으로 응모권을 모아 이벤트에 응모하고 추첨 결과를 확인하는 플랫폼입니다.<br>
+        <b>응모권을 돈에 준해 다루는 것</b>이 과제 조건이었고, 같은 요청이 겹쳐도 중복 반영하지 않고 이력의 합계와 보유 수가 어긋나지 않는 것이 목표였습니다.</p>
+
+      <dl class="meta">
+        <dt>기간</dt><dd>2026.09 ~ 2026.10 (진행 중, 발표 2026.10.28)</dd>
+        <dt>팀</dt><dd>백엔드 5명</dd>
+        <dt>내 역할</dt><dd><b>응모권, 출석, 미션, 응모, 요청 빈도 제한, 정합성 검증</b> (백엔드 저장소 커밋 238건 · 병합 PR 45건)</dd>
+        <dt>스택</dt><dd>Java 21 · Spring Boot · MySQL 8.4 · Flyway · Redis · Testcontainers · Locust</dd>
+        <dt>저장소</dt><dd><a href="https://github.com/Uplus-GETDDO/getddo-be">github.com/Uplus-GETDDO/getddo-be ↗</a> · <a href="https://github.com/Uplus-GETDDO/getddo-spec">getddo-spec ↗</a></dd>
+      </dl>
+
+      <div class="scope">
+        <h4>담당 범위</h4>
+        <ul>
+          <li><b>응모권 모델</b> — 지갑·원장 여러 테이블에서 <b>한 장이 한 행인 <code>tickets</code>와 수정 없이 쌓는 <code>ticket_histories</code> 두 테이블</b>로 줄였습니다. 등급과 만료가 장마다 다르고, 이벤트가 취소되면 쓴 그 응모권이 원래 등급으로 돌아와야 하기 때문입니다.</li>
+          <li><b>응모 처리</b> — 응모 기록, 응모권 차감, 이력을 한 트랜잭션에 묶었습니다. 같은 요청은 응모 ID(멱등 키)를 기본 키로 삼아 한 번만 처리하고, 행 잠금과 DB 유일 제약이 뒤를 받칩니다. 마감은 시작, 차감 직후, 커밋 직전의 세 번 확인합니다.</li>
+          <li><b>출석·미션 보상</b> — 출석은 같은 사용자와 같은 KST 날짜를 같은 행위로 보고, 미션은 제출 ID와 요청 해시, 보상 청구 유일 제약으로 막았습니다. 보상 등급은 서버가 무작위로 정하고 재요청해도 다시 뽑지 않습니다.</li>
+          <li><b>요청 빈도 제한</b> — 서버 메모리 카운터는 서버마다 갈리므로 Redis 공유 카운터(Lua 스크립트)로 옮겼습니다. 초과하면 429와 남은 초를 돌려주고, Redis가 죽으면 요청은 막지 않고 통과시킵니다.</li>
+          <li><b>정합성 검증</b> — 깨지면 안 되는 규칙 8개를 코드보다 먼저 정하고 SQL로 전수 검사했습니다. 서버 시험의 설계, 실행, DB 대조까지 맡았습니다.</li>
+          <li>스테이징 환경과 배포, 추첨, 부하 한계 시험, 게임은 다른 팀원이 맡았습니다.</li>
+        </ul>
+      </div>
+
+      <div class="case">
+        <h3>마감 직전에 몰려도, 마감 뒤에 확정된 응모는 0건이었습니다 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>마감 직전에는 요청이 한꺼번에 몰립니다. 요청이 "아직 열려 있음"을 확인한 뒤 저장하는 사이에 마감이 지나갈 수 있습니다.</dd></div>
+          <div class="step"><dt>원인</dt><dd>확인과 저장이 한 단계가 아니어서, 확인한 시점의 상태가 저장 시점까지 유지된다는 보장이 없습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>
+            마감을 세 번 확인하고, <b>커밋 직전 확인에서 마감을 넘었으면 응모 전체를 롤백</b>합니다.
+            추첨 준비는 이벤트 행을 쓰기 잠금으로 잡아 진행 중인 응모의 커밋을 기다린 뒤 그 응모를 후보에 넣습니다.
+          </dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>
+            스테이징 서버(API 2대)에서 가상 사용자 <span class="num">200</span>명이 마감 10초 전부터 5초 후까지 응모 5건씩, 회차당 약 <span class="num">1,000</span>건을 <span class="num">3</span>회 보냈습니다.
+            <b>마감 뒤 확정은 3회 모두 0건.</b> 접수 <span class="num">1,522</span>건 = 차감 <span class="num">1,522</span>장 = 사용 이력 <span class="num">1,522</span>건이고,
+            마감 거절 1,478건과 보유 부족 19건에는 사용 이력이 없었으며 추첨 후보도 접수된 응모와 같았습니다.
+            판정은 서버가 기록한 시각만 썼고 클라이언트 시계는 쓰지 않았습니다.
+          </dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>
+            커밋 직전 확인과 DB가 커밋을 확정하는 순간 사이에는 짧은 틈이 남고, 구현으로 없앨 수 없어 공용 명세에 예외로 적었습니다.
+            마지막 수락이 마감 21~24ms 전이었다는 관측은 서버 시계 해상도(±15~30ms)와 같은 크기여서 보장 수치로 쓰지 않습니다.
+            서버 한 대 중단과 부하 한계는 측정하지 않았습니다.
+          </dd></div>
+          <div class="step"><dt>내 범위</dt><dd>시험 설계와 실행, DB 대조는 제가 했고 스테이징 환경과 배포는 다른 팀원이 맡았습니다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>보호 장치를 하나씩 빼 보니 7종 중 6종에서 규칙이 깨졌습니다 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>"위반 0건"은 그 장치가 없어도 0일 수 있어서, 장치가 실제로 일하는지는 증명하지 못합니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>
+            규칙을 먼저 정해 SQL로 전수 검사한 뒤, 테스트에서 DB 제약을 풀거나 임시 worktree에서 잠금 한 줄을 바꿔 <b>같은 시나리오를 다시</b> 돌렸습니다.
+            마이그레이션 파일은 수정하지 않았고 변경은 모두 되돌렸습니다.
+          </dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>
+            7종 중 6종에서 위반 또는 실패가 재현됐습니다. 응모자 행 잠금을 빼면 15회 모두 위반(수락 86~96건, 기대 <span class="num">60</span>),
+            미션 청구 유일 제약을 빼면 중복 청구 20쌍에 응모권 72장(기대 <span class="num">48</span>)이었습니다.
+          </dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>
+            재현되지 않은 1종은 출석 유일 제약만 뺀 경우입니다. 보상 청구 유일 제약이 대신 막았고, 둘 다 빼면 16명 모두 위반이었습니다.
+            응모권 행 잠금을 빼도 이중 사용은 생기지 않았습니다. DB 유일 제약이 막고 요청이 500으로 실패했습니다. 잠금은 오염을 막는 것이 아니라 경합을 차례로 성공시키는 역할입니다.
+            로컬 단일 머신의 상대 비교이고 서버 두 대는 한 JVM의 앱 두 개였습니다.
+          </dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>반환을 동시에 하면 60회 중 60회 교착이 났습니다 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>이벤트 취소로 응모권을 되돌리는 반환을 서로 다른 사용자 4명이 동시에 호출하면 교착이 났습니다.</dd></div>
+          <div class="step"><dt>원인</dt><dd>반환 이력을 항상 잠금 읽기로 확인했습니다. MySQL 교착 기록을 보니 이력 인덱스의 아직 없는 구간을 두 트랜잭션이 읽기 잠금으로 먼저 잡고, 각자 INSERT하려다 서로 막혔습니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>응모권 상태로 먼저 판정하고, 상태가 이상할 때만 이력을 잠금 읽기로 확인하도록 좁혔습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>같은 조건에서 10번 시도해 교착 <span class="num">0</span>건.</dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>READ_COMMITTED에서는 원래 이 문제가 없었고, 모든 스레드를 커밋 직전에 만나게 한 인위적인 조건이었습니다. 로컬 측정입니다.</dd></div>
+        </dl>
+      </div>
+
+      <div class="case">
+        <h3>서버가 두 대여도 요청 제한은 하나로 합쳐졌습니다 <span class="chip chip-measured">측정됨</span></h3>
+        <dl class="steps">
+          <div class="step"><dt>상황</dt><dd>서버가 두 대가 되면 메모리에 두는 카운터는 서버마다 따로 셉니다. 한도가 서버 수만큼 늘어납니다.</dd></div>
+          <div class="step"><dt>조치</dt><dd>카운터를 Redis에 두어 서버가 같은 값을 읽고 쓰게 했습니다.</dd></div>
+          <div class="step is-result"><dt>결과</dt><dd>
+            스테이징에서 요청이 두 서버에 49.8 : 50.2로 나뉘었고, 같은 사용자의 25번 연속 호출은 <b>11번째부터 429</b>였습니다. 서버별로 따로 셌다면 20번대에 나왔을 것입니다.
+            시험 이벤트 7개는 모두 추첨 1건, 시작 알림 1건이었고 중복은 없었습니다.
+          </dd></div>
+          <div class="step"><dt>남은 과제</dt><dd>
+            설정값을 직접 본 것이 아니라 25회 호출 결과로 확인했고, 25회가 두 서버에 고르게 나뉜 것도 요청별로 확인하지 못했습니다.
+            서버 두 대만 쟀으므로 "몇 대여도"라고 쓰지 않습니다. 서버 시계 차이는 20ms 안팎까지는 구분하지 못했습니다.
+          </dd></div>
+        </dl>
+      </div>
+    </article>
+
     <!-- ── AI-BASED-ETA ─────────────────── -->
     <article class="project" id="eta">
       <figure class="p-logo">
@@ -737,6 +850,21 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
           <b>"내 로컬에서는 됩니다"가 사라진 것</b>이 이 작업의 성과였습니다.
         </p>
       </div>
+      <div class="cap">
+        <div class="cap-name">스펙 저장소를 원본으로<span>GETDDO</span></div>
+        <p>
+          공용 정책은 별도 저장소(getddo-spec)에서 관리하고 구현이 다르면 구현 쪽에서 차이를 보고하는 규칙으로 일했습니다.
+          마감 직전의 짧은 틈은 구현으로 없앨 수 없다는 사실을 숨기지 않고 <b>공용 명세에 예외로 적었습니다.</b>
+          확인하지 않은 사실을 문서에 쓰지 않는다는 규칙은 저장소 작업 지침에도 적어 두었습니다.
+        </p>
+      </div>
+      <div class="cap">
+        <div class="cap-name">측정 기준을 먼저<span>GETDDO</span></div>
+        <p>
+          기능을 만든 뒤에야 측정을 시작한 것이 아쉬웠습니다. 규칙을 먼저 정하고 SQL로 전수 검사하는 방식은 좋았지만 시작이 늦었습니다.
+          다음에는 기능과 함께 <b>깨지면 안 되는 규칙부터 정의</b>하겠습니다.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -750,7 +878,7 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
         <div class="rec-when">2026.04 – 10<b>진행 중</b></div>
         <div class="rec-what">
           <strong>[LG유플러스] 유레카 SW교육과정 4기<em>부트캠프</em></strong>
-          <p>백엔드 과정 (2026.04.06 ~ 2026.10.28). MINGPARK · TOCKTALKS · Mealiver-IT 세 개의 팀 프로젝트를 연속으로 수행했습니다.</p>
+          <p>백엔드 과정 (2026.04.06 ~ 2026.10.28). MINGPARK · TOCKTALKS · Mealiver-IT · GETDDO 네 개의 팀 프로젝트를 연속으로 수행했습니다.</p>
         </div>
       </div>
       <div class="rec">
