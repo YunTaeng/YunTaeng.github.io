@@ -83,7 +83,7 @@
   .hero { padding-block: 3.2rem 1.6rem; }
   .ident { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 2.4rem; }
   .ident img {
-    width: 96px; height: 123px; max-width: 100%;
+    width: 144px; height: 185px; max-width: 100%;
     object-fit: cover; display: block;
     border: 1px solid var(--rule); border-radius: 2px;
     flex: none;
@@ -141,6 +141,9 @@
   .card .meta-line { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--ink-3); }
 
   .limit { font-size: 0.95rem; color: var(--ink-3); }
+  .stack { list-style: none; padding-left: 0; }
+  .stack li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0 1rem; margin-bottom: 0.3rem; }
+  .stack li b { color: var(--ink-3); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; }
 
   /* ── record ──────────────────────────── */
   .rec { display: grid; grid-template-columns: var(--rail) 1fr; gap: 0.35rem 1.3rem; padding-block: 1.2rem; border-bottom: 1px solid var(--rule); }
@@ -163,7 +166,7 @@
     .step dt { padding-top: 0.4rem; }
     .hero { padding-block: 2.2rem 1.4rem; }
     .ident { gap: 1.1rem; }
-    .ident img { width: 78px; height: 100px; }
+    .ident img { width: 96px; height: 123px; }
     .ident-name span { display: block; margin-left: 0; white-space: normal; }
     .ident-links a { overflow-wrap: anywhere; }
   }
@@ -181,7 +184,7 @@
 <main id="content">
   <header class="hero wrap" id="top">
     <div class="ident">
-      <img src="assets/photo.jpg" alt="윤태형 프로필 사진" width="96" height="123">
+      <img src="assets/photo.jpg" alt="윤태형 프로필 사진" width="144" height="185">
       <div class="ident-body">
         <p class="ident-name">윤태형<span>YUN TAE HYEONG</span></p>
         <p class="ident-role">백엔드 개발자</p>
@@ -193,27 +196,60 @@
     </div>
 
     <h1>요청이 한꺼번에 몰리는 자리를 맡아 왔습니다.</h1>
-    <p class="lede">
-      LG유플러스 유레카 과정에서 콘서트 예매 대기열, 인증, 쿠폰 시더, 응모권 정합성을 맡았습니다.
-      <b>동시에 들어오는 요청</b>을 처리하는 자리도 있었고, 데이터를 쌓고 맞추는 자리도 있었습니다.
-    </p>
-    <p class="lede">
-      개발 전에는 경영지원 총무로 3년 3개월간 IT 자산 관리와 전산 컴플라이언스 대응을 했습니다.
-    </p>
-
-    <p class="hero-callout">
-      이벤트 응모 서비스에서 <b>마감 경계</b>, 즉 마감 10초 전부터 5초 뒤까지 몰린 요청을 스테이징 API 2대로 세 차례 시험해, 마감 뒤 확정된 응모가 0건임을 확인했습니다.
-    </p>
   </header>
+
+  <section class="wrap" id="certs">
+    <div class="sec-head">
+      <h2>자격 · 어학</h2>
+    </div>
+    <div>
+      <div class="rec">
+        <div class="rec-when">2026.09<b>합격</b></div>
+        <div class="rec-what">
+          <strong>SQLD<em>SQL 개발자 · 한국데이터산업진흥원</em></strong>
+        </div>
+      </div>
+      <div class="rec">
+        <div class="rec-when">2025.06<b>취득</b></div>
+        <div class="rec-what">
+          <strong>정보처리기사<em>한국산업인력공단</em></strong>
+        </div>
+      </div>
+      <div class="rec">
+        <div class="rec-when">2024.11<b>점수</b></div>
+        <div class="rec-what">
+          <strong>TOEIC 745</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="skills">
+    <div class="sec-head">
+      <h2>기술 스택</h2>
+    </div>
+    <ul class="stack">
+      <li><b>Backend</b> Java · Spring Boot · Spring Security · JPA · JWT</li>
+      <li><b>Database</b> MySQL · Redis · Flyway</li>
+      <li><b>Test</b> JUnit 5 · Testcontainers · k6 · Locust</li>
+      <li><b>Etc</b> Python · Flask · React</li>
+    </ul>
+  </section>
 
   <section class="wrap" id="getddo">
     <div class="sec-head">
-      <h2>대표 사례: GETDDO — 이벤트 응모 서비스</h2>
+      <h2>프로젝트 — 대표 사례: GETDDO</h2>
     </div>
+
+    <p>
+      LG유플러스 유레카 과정에서 콘서트 예매 대기열, 인증, 쿠폰 시더, 응모권 정합성을 맡았습니다.
+      <b>동시에 들어오는 요청</b>을 처리하는 자리도 있었고, 데이터를 쌓고 맞추는 자리도 있었습니다.
+      그중 담당 범위가 가장 컸던 이벤트 응모 서비스(GETDDO)를 먼저 적습니다.
+    </p>
 
     <p class="p-result">
       <span class="chip chip-measured">측정됨</span>
-      스테이징 서버 2대에서 200명이 마감 전후로 3회 시험했고, <b>마감 뒤 확정은 0건</b>이었습니다.
+      스테이징 서버 2대에서 200명이 <b>마감 경계</b>(마감 10초 전부터 5초 뒤)에 몰리는 상황을 3회 시험했고, <b>마감 뒤 확정은 0건</b>이었습니다.
       시험을 실행하는 과정에서 퀴즈 보상 누락 결함이 드러났고, 수정 뒤에도 연결 풀 부족으로 503이 남아 “5xx 0” 기준은 달성하지 못했습니다.
     </p>
 
@@ -263,9 +299,9 @@
 
     <h3>남은 한계</h3>
     <ul>
-      <li>위협 12개 중 서버에서 확인하지 못한 것이 3개(월말 만료, 처리 도중 실패, 롤링 배포) 있습니다.</li>
-      <li>연결 풀 503의 원인을 특정하지 못했습니다.</li>
-      <li>마감 경계 시험의 1회차는 시험 스크립트의 검증 함수 오류로 요청이 1,019건이었고, 수정 뒤 2·3회차는 1,000건이었습니다.</li>
+      <li>위협 12개 가운데 서버에서 확인하지 못한 3개(월말 만료, 처리 도중 실패, 롤링 배포)가 남아 있습니다. 이 시험을 이어서 진행하려 합니다.</li>
+      <li>연결 풀 503의 원인을 특정하지 못했습니다. 풀 크기와 수정 전후를 나눠 비교해 원인을 가르고 싶습니다.</li>
+      <li>시험이 드러낸 규칙 누락처럼, 완료 조건을 규칙에 하나씩 추가하며 전수 검사 범위를 넓혀 가려 합니다.</li>
     </ul>
   </section>
 
@@ -286,7 +322,7 @@
         AI 코드 점검에서 대기열을 거치지 않고 선점 API에 직접 접근할 수 있는 경로가 지적됐고, 확인한 뒤 게이트 검사를 추가해 수정했습니다.
         Kakao OAuth2 도입 뒤 생긴 NPE는 인증 정보를 꺼내는 지점을 하나로 모아 해결했습니다.
       </p>
-      <p class="limit">한계: 활성 인원 50명과 1초 스케줄러 주기는 근거 있는 용량 산정이 아니라 초기 가정값입니다.</p>
+      <p class="limit">한계: 활성 인원 50명과 1초 스케줄러 주기는 근거 있는 용량 산정이 아니라 초기 가정값입니다. 입장 인원과 주기를 부하를 올려 가며 측정해 근거 있는 값으로 정하고 싶습니다.</p>
     </article>
 
     <article class="card" id="tocktalks">
@@ -300,7 +336,7 @@
         로그아웃 뒤 Access 토큰이 남는 문제와 Refresh 재사용 탐지 누락은 AI 점검에서 지적된 것을 코드로 확인하고 반영했습니다.
         Redis 장애 때는 fail-open으로 로그인이 막히지 않게 했습니다.
       </p>
-      <p class="limit">한계: CI/CD가 없고 성능을 측정하지 않았습니다. fail-open은 가용성을 택한 대신 장애 중에는 로그인 대입 방어가 열립니다.</p>
+      <p class="limit">한계: CI/CD가 없고 성능 측정도 하지 않았습니다. 부하 측정과 CI 구성을 우선 진행하려 합니다. fail-open은 가용성을 택한 대신 장애 중 로그인 대입 방어가 열립니다. 서비스 성격에 맞춰 fail-closed와 비교한 뒤 다시 판단하고 싶습니다.</p>
     </article>
 
     <article class="card" id="mealiver">
@@ -314,7 +350,7 @@
         청크 배치 INSERT와 <code>rewriteBatchedStatements</code>를 적용했고, 캠페인 단위 커밋과 재개(resume)를 지원해 중단 뒤 이어서 돌릴 수 있게 했습니다.
         이 데이터셋 위에서 팀의 부하 테스트가 진행됐고, 재고 100·동시 50 조건에서 초과 발급 0건이 확인됐습니다.
       </p>
-      <p class="limit">한계: 시더 단계별 소요 시간을 기록하지 않아 배치 옵션의 효과를 수치로 비교할 수 없습니다.</p>
+      <p class="limit">한계: 시더 단계별 소요 시간을 기록하지 않아 배치 옵션의 효과를 수치로 비교할 수 없습니다. 다음에는 단계별 소요 시간부터 기록해 옵션 간 차이를 확인하려 합니다.</p>
     </article>
   </section>
 
@@ -329,22 +365,28 @@
     </p>
   </section>
 
-  <section class="wrap" id="skills">
+  <section class="wrap" id="career">
     <div class="sec-head">
-      <h2>기술</h2>
+      <h2>경력</h2>
     </div>
-    <ul>
-      <li><b>Java 21 · Spring Boot</b> — REST API, 트랜잭션 경계 설계</li>
-      <li><b>Spring Security · JWT</b> — 세션 로그인, 토큰 발급·회전, Kakao OAuth2, WebSocket 연결 인증</li>
-      <li><b>Redis</b> — Sorted Set 대기열, Refresh 토큰 저장, 로그인 실패 카운터, 서버 여러 대가 공유하는 요청 빈도 제한(Lua 스크립트)</li>
-      <li><b>MySQL · JPA · Flyway</b> — 비관적 락, 청크 단위 배치 인서트, 교착 로그 확인</li>
-      <li><b>테스트</b> — JUnit 5, Testcontainers, k6, Locust(AI와 함께 만든 시나리오를 직접 실행)</li>
-    </ul>
+    <div>
+      <div class="rec">
+        <div class="rec-when">2020.09 – 2021.05<br>2022.11 – 2025.04<b>합계 3년 3개월</b></div>
+        <div class="rec-what">
+          <strong>클라우드시큐리티 주식회사<em>경영지원</em></strong>
+          <ul>
+            <li>헬프데스크 운영 관리 보조, 사내 지원 요청 대응</li>
+            <li>IT 유·무형 자산 관리와 전산 자산 내부 컴플라이언스 대응</li>
+            <li>신규 입사자 온보딩 지원, 공용 공간·비품 관리</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="wrap" id="record">
+  <section class="wrap" id="education">
     <div class="sec-head">
-      <h2>경력 · 학력 · 자격</h2>
+      <h2>학력 · 교육</h2>
     </div>
     <div>
       <div class="rec">
@@ -369,29 +411,7 @@
         </div>
       </div>
       <div class="rec">
-        <div class="rec-when">2020.09 – 2025.04<b>3년 3개월</b></div>
-        <div class="rec-what">
-          <strong>클라우드시큐리티 주식회사<em>경영지원</em></strong>
-          <ul>
-            <li>헬프데스크 운영 관리 보조, 사내 지원 요청 대응</li>
-            <li>IT 유·무형 자산 관리와 전산 자산 내부 컴플라이언스 대응</li>
-            <li>신규 입사자 온보딩 지원, 공용 공간·비품 관리</li>
-          </ul>
-        </div>
-      </div>
-      <div class="rec">
-        <div class="rec-when">2024 – 2026<b>자격·어학</b></div>
-        <div class="rec-what">
-          <strong>SQLD · 정보처리기사 · TOEIC</strong>
-          <ul>
-            <li><b>SQLD</b> (SQL 개발자) · 2026.09 합격 · 한국데이터산업진흥원</li>
-            <li><b>정보처리기사</b> · 2025.06 · 한국산업인력공단</li>
-            <li><b>TOEIC 745</b> · 2024.11</li>
-          </ul>
-        </div>
-      </div>
-      <div class="rec">
-        <div class="rec-when">2021.05<b>입대 전</b></div>
+        <div class="rec-when">학부 시절<b>동아리</b></div>
         <div class="rec-what">
           <strong>세종대학교 중앙동아리 인터페이스<em>코딩 동아리</em></strong>
           <p>기장을 맡아 프로그래밍 전시회에 참여했고 비전공자·문과생을 위한 정기 스터디를 개설해 운영했습니다.</p>
