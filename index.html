@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>윤태형 포트폴리오</title>
 <style>
   /* KS X 1001 완성형 2350자로 서브셋한 woff2. 본문 Light, 강조 Bold 두 종 */
@@ -207,6 +208,8 @@
   .case { margin-bottom: 2.4rem; }
   .case > h3 { font-size: 1.02rem; margin: 0 0 1rem; padding-left: 0.85rem; border-left: 3px solid var(--accent); line-height: 1.6; }
   .case > h3 .chip { margin-left: 0.45rem; }
+  .p-result { margin: 0.3rem 0 1.2rem; font-size: 0.95rem; font-weight: 700; color: var(--ink-2); }
+  .hero-callout { margin-top: 1.8rem; padding: 0.9rem 1rem; background: var(--surface-sunk); border-left: 3px solid var(--accent); font-size: 0.93rem; color: var(--ink-2); }
   .steps { display: grid; margin: 0; }
   .step { display: grid; grid-template-columns: 4.8rem 1fr; gap: 0.35rem 1rem; padding-block: 0.6rem; border-bottom: 1px dotted var(--rule); }
   .step:last-child { border-bottom: none; }
@@ -309,6 +312,10 @@
     <p class="lede">
       그 전에는 3년 3개월 동안 헬프데스크 운영과 IT 자산 관리를 하며 장애 요청을 받는 쪽에 있었습니다.
       돌아가는 코드와 운영할 수 있는 코드는 다르다는 걸 그때 봤고 그 차이를 전제로 개발합니다.
+    </p>
+
+    <p class="hero-callout">
+      <b>마감 경계에서 마감 뒤 확정 0건 · 접수 = 차감 = 이력 일치</b> — 근거와 한계는 아래 사례에서 확인하실 수 있습니다.
     </p>
 
   </header>
@@ -466,6 +473,7 @@
         <img src="assets/mingpark-logo.png" alt="MINGPARK 로고" width="1120" height="180" loading="lazy">
       </figure>
       <h2 class="p-title"><span class="tag">2026.06 – 07 · 콘서트 예매</span>MINGPARK</h2>
+      <p class="p-result">좌석 선점 평균 응답 200ms대 → 한 자릿수 ms, 50석 전부 예매</p>
       <p class="p-sub">공연 탐색부터 대기열 입장, 좌석 선점, 포인트 결제와 환불까지 하나의 흐름으로 묶은 예매 서비스입니다.</p>
 
       <dl class="meta">
@@ -537,6 +545,7 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
         <img src="assets/tocktalks-logo.png" alt="TOCKTALKS 로고" width="316" height="203" loading="lazy">
       </figure>
       <h2 class="p-title"><span class="tag">2026.07 · 실시간 모의투자</span>TOCKTALKS</h2>
+      <p class="p-result">Refresh 토큰 1회용 회전, 재사용되면 해당 계정 토큰 전체 무효화 · 로그인 5회 실패 시 5분 잠금</p>
       <p class="p-sub">같은 시드머니로 방을 만들어 정해진 시간 동안 수익률을 겨루고 인증된 투자 카드를 커뮤니티에 공유하는 서비스입니다. 실시간 주가는 KIS Open API에서 받아옵니다.</p>
 
       <dl class="meta">
@@ -598,6 +607,7 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
         <img src="assets/mealiver-logo.png" alt="Mealiver-IT 로고" width="256" height="256" loading="lazy">
       </figure>
       <h2 class="p-title"><span class="tag">2026.08 · 선착순 쿠폰</span>Mealiver-IT</h2>
+      <p class="p-result">회원 100만 · 주문 약 1,025만 · 발급 이력 약 290만 건을 5단계 시더로 적재, 중단 후 재개 지원</p>
       <p class="p-sub">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다.<br>
         <b>재고 <span class="num">1만</span> 개에 동시 요청 <span class="num">2만</span> 건이 들어와도 초과 발급 0과 1인 1매를 지키는 것</b>이 목표였습니다.</p>
 
@@ -651,6 +661,7 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
     <!-- ── GETDDO ─────────────────────── -->
     <article class="project" id="getddo">
       <h2 class="p-title"><span class="tag">2026.09 – 10 · 이벤트 응모·추첨</span>GETDDO</h2>
+      <p class="p-result">마감 경계에서 마감 뒤 확정 0건 · 접수 = 차감 = 사용 이력</p>
       <p class="p-sub">출석·미션·게임으로 응모권을 모아 이벤트에 응모하고 추첨 결과를 확인하는 플랫폼입니다.<br>
         <b>응모권을 돈에 준해 다루는 것</b>이 과제 조건이었고, 같은 요청이 겹쳐도 중복 반영하지 않고 이력의 합계와 보유 수가 어긋나지 않는 것이 목표였습니다.</p>
 
@@ -748,6 +759,7 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
         <img src="assets/eta-logo.svg" alt="미래지도 (AI-BASED-ETA) 로고" width="750" height="375" loading="lazy">
       </figure>
       <h2 class="p-title"><span class="tag">2024.03 – 06 · 세종대 캡스톤</span>AI-BASED-ETA</h2>
+      <p class="p-result">60분까지만 예측하는 모델로 4시간대 경로를 Sliding Window로 계산</p>
       <p class="p-sub">한국도로공사 공공데이터의 VDS 데이터로 학습한 모델을 써서, 출발 시각에 따라 달라지는 도착 시간과 최단 시간 경로를 계산하는 서비스입니다.</p>
 
       <dl class="meta">
