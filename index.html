@@ -105,7 +105,7 @@
     .sidenav {
       display: block;
       position: fixed; top: 50%; transform: translateY(-50%);
-      left: calc(50% - (var(--col) / 2) - 10rem);
+      left: calc(50% - (var(--col) / 2) - 14rem);
       width: 9rem; z-index: 9;
     }
     .topnav .anchor { display: none; }
@@ -272,7 +272,7 @@
 <nav class="sidenav" aria-label="목차">
   <ul>
     <li><a href="#top">소개</a></li>
-    <li><a href="#capability">네 가지 축</a></li>
+    <li><a href="#capability">세 가지 축</a></li>
     <li><a href="#skills">기술</a></li>
     <li><a href="#projects">프로젝트</a></li>
     <li class="sub"><a href="#mingpark">MINGPARK</a></li>
@@ -322,7 +322,7 @@
 
   <section class="wrap" id="capability">
     <div class="sec-head">
-      <h2>네 가지 축</h2>
+      <h2>세 가지 축</h2>
       <span class="en">Core</span>
     </div>
     <div>
@@ -338,16 +338,8 @@
         <div class="cap-name">동시성 제어<span>CONCURRENCY</span></div>
         <p>
           <b>동시성</b> 경합이 생기는 자리마다 방식을 달리 골랐습니다. 예매 진입은 <b>Redis 대기열</b>로 인원을 끊었고,
-          방 상태는 <b>비관적 락</b>을 잡은 뒤 조건을 다시 확인하는 쪽으로, 응모는 <b>멱등 키와 행 잠금</b>으로 처리했습니다.
-          <span class="src">MINGPARK · TOCKTALKS</span>
-        </p>
-      </div>
-      <div class="cap">
-        <div class="cap-name">대용량 데이터<span>DATA PIPELINE</span></div>
-        <p>
-          빈 테이블에 요청을 쏘면 인덱스도 락 경합도 실제와 다르게 움직입니다.
-          회원 100만, 주문 약 1,025만 건을 5단계 시더로 채워, 팀 전체가 같은 조건 위에서 검증하도록 만들었습니다.
-          <span class="src">Mealiver-IT</span>
+          방 상태는 <b>비관적 락</b>을 잡은 뒤 조건을 다시 확인하는 쪽으로, 쿠폰 발급은 팀이 부하 테스트 결과를 바탕으로 <b>DB 락 → 캐시 → 샤딩</b> 순으로 계획했습니다.
+          <span class="src">MINGPARK · TOCKTALKS · Mealiver-IT</span>
         </p>
       </div>
       <div class="cap">
@@ -607,9 +599,9 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
         <img src="assets/mealiver-logo.png" alt="Mealiver-IT 로고" width="256" height="256" loading="lazy">
       </figure>
       <h2 class="p-title"><span class="tag">2026.08 · 선착순 쿠폰</span>Mealiver-IT</h2>
-      <p class="p-result">회원 100만 · 주문 약 1,025만 · 발급 이력 약 290만 건을 5단계 시더로 적재, 중단 후 재개 지원</p>
-      <p class="p-sub">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다.<br>
-        <b>재고 <span class="num">1만</span> 개에 동시 요청 <span class="num">2만</span> 건이 들어와도 초과 발급 0과 1인 1매를 지키는 것</b>이 목표였습니다.</p>
+      <p class="p-result">재고 1만 / 동시 2만 요청에서 초과 발급 0, 1인 1매가 목표 — 팀 부하 테스트 결과를 바탕으로 DB 락 → Redis → 재고 샤딩 순으로 발급 방식을 계획</p>
+      <p class="p-sub">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다.
+        팀 부하 테스트 결과를 공유받아 발급 방식을 <b>DB 비관적 락 → Redis 사전 필터 → 재고 샤딩</b> 순으로 계획했습니다.</p>
 
       <dl class="meta">
         <dt>기간</dt><dd>2026.08.06 ~ 2026.08.31 (약 4주)</dd>
@@ -622,32 +614,13 @@ k6 스크립트(가상 사용자 10명 / 100초)로 중복 요청 응답 코드�
       <div class="scope">
         <h4>담당 범위</h4>
         <ul>
-          <li><b>시더와 대량 적재</b> — 발급 조건이 등급과 주문 이력에 걸려 있어 회원만 만들어서는 조건 분기를 태울 수 없었습니다. 의존성 순서대로 채우는 5단계 시더를 만들었습니다. 수백만 건을 넣다 끊기면 처음부터 다시 돌려야 하니 <b>재개 기능</b>을 먼저 넣었습니다. 적재는 청크 단위로 끊고 JDBC 배치 옵션으로 왕복을 줄였습니다.</li>
-          <li><b>등급 산정 배치</b> — 주문 이력으로 회원 등급을 매기는 배치 잡을 구현했고 한 건씩 UPDATE하던 것을 <code>CASE WHEN</code> 청크 방식으로 바꿨습니다.</li>
-          <li>제 작업의 목표는 <b>팀 전원이 같은 규모·같은 분포의 데이터 위에서 검증하게 만드는 것</b>이었습니다.</li>
+          <li><b>더미 데이터 파이프라인</b> — 부하 테스트가 의미를 갖도록 회원 100만·주문 약 1,025만·발급 이력 약 290만 건 규모의 데이터셋을 시더로 구성했습니다.</li>
+          <li><b>버전 사다리 계획</b>(팀 공동) — 팀 부하 테스트 결과를 바탕으로 V1 DB 비관적 락 → V2 Redis 스냅샷 사전 필터 → V3 재고 샤딩 순으로 발급 방식을 계획했습니다.</li>
         </ul>
       </div>
 
       <div class="case">
-        <h3>부하 테스트가 의미를 가지려면 데이터가 먼저 있어야 했습니다 <span class="chip chip-measured">측정됨</span></h3>
-        <dl class="steps">
-          <div class="step"><dt>상황</dt><dd>초과 발급과 중복 발급은 데이터가 쌓인 상태에서만 드러납니다. 빈 테이블에 요청을 쏘면 인덱스도 락 경합도 실제와 다르게 동작합니다.</dd></div>
-          <div class="step"><dt>원인</dt><dd>등급·주문 이력에 의존하는 발급 조건이 있어, 회원만 만들어서는 조건 분기를 태울 수 없었습니다.</dd></div>
-          <div class="step"><dt>조치</dt><dd>
-            회원 → 주문 → 등급 → 캠페인 → 발급 이력 순서로 의존성을 따라가는 <b>5단계 시더 체인</b>을 만들었습니다.
-            전체를 한 트랜잭션에 담지 않고 청크 단위 배치 인서트로 끊었습니다.
-            네트워크 왕복은 <code>rewriteBatchedStatements=true</code>로 줄였습니다.
-          </dd></div>
-          <div class="step is-result"><dt>결과</dt><dd>
-            가상 회원 <span class="num">100만</span>, 주문 약 <span class="num">1,025만</span>, 발급 이력 약 <span class="num">290만</span> 건의 데이터셋을 구성해,
-            팀원 전원이 같은 규모·같은 분포 위에서 검증을 돌릴 수 있게 했습니다.
-          </dd></div>
-          <div class="step"><dt>남은 과제</dt><dd>시더 실행 시간을 단계별로 기록해두지 않아 배치 옵션이 얼마나 기여했는지는 수치로 말할 수 없습니다. 다음에는 단계별 소요 시간부터 남기겠습니다.</dd></div>
-        </dl>
-      </div>
-
-      <div class="case">
-        <h3>이 데이터로 팀이 확인한 것 <span class="chip chip-measured">측정됨</span></h3>
+        <h3>V1 리허설 결과 <span class="chip chip-measured">측정됨</span></h3>
         <dl class="steps">
           <div class="step is-result"><dt>결과</dt><dd>
             재고 <span class="num">100</span>개에 <b>동시 요청</b> <span class="num">50</span>건 리허설에서 초과 발급 0, 요청 50건 모두 정상 발급.
