@@ -22,158 +22,145 @@
   }
 
   :root {
-    --paper:        #FFFFFF;
-    --surface:      #FFFFFF;
-    --surface-sunk: #F4F5F3;
-    --ink:          #15181B;
-    --ink-2:        #41474C;
-    --ink-3:        #767D82;
-    --rule:         #E5E7E4;
-    --rule-strong:  #C8CCC7;
-    --accent:       #0E6A5E;
-    --accent-soft:  #E4EFEC;
-    --metric:       #935410;
-    --metric-soft:  #F7EEDF;
+    --bg:      #2b3136;
+    --ink:     #f1f3f4;
+    --ink-2:   #cdd3d7;
+    --ink-3:   #8e98a0;
+    --rule:    #566067;
+    --accent:  #3fe0b8;
 
     --sans: "Freesentation", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
-
-    /* 문서형 한 열. 글자 크기는 아래 font-size 한 곳에서 조절한다 */
-    --col: 35rem;
-    --rail: 8rem;
-    color-scheme: light;
-    font-size: 20.4px;
+    --rail: 13rem;
+    color-scheme: dark;
+    font-size: 19px;
   }
 
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--ink-2);
     font-family: var(--sans);
     font-size: 1rem;
     font-weight: 300;
-    line-height: 1.8;
+    line-height: 1.75;
     letter-spacing: -0.005em;
     -webkit-font-smoothing: antialiased;
     word-break: keep-all;
   }
 
-  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(14,106,94,0.3); }
-  a:hover { border-bottom-color: var(--accent); }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  a:hover { border-bottom-color: var(--accent); color: var(--accent); }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-
-  code {
-    font-family: inherit;
-    font-size: 0.93em;
-    background: var(--surface-sunk);
-    padding: 0.1em 0.38em;
-    border-radius: 3px;
-    color: var(--ink-2);
-    word-break: break-all;
-  }
   b, strong { font-weight: 700; color: var(--ink); }
 
-  .wrap { max-width: var(--col); margin: 0 auto; padding-inline: 20px; }
-
-  .skip { position: absolute; left: -9999px; background: #fff; color: var(--ink); padding: 0.5rem 0.9rem; border: 1px solid var(--rule-strong); }
+  .skip { position: absolute; left: -9999px; background: var(--bg); color: var(--ink); padding: 0.5rem 0.9rem; border: 1px solid var(--rule); }
   .skip:focus { left: 1rem; top: 1rem; z-index: 20; }
 
-  /* ── identity ────────────────────────── */
-  .hero { padding-block: 3.2rem 1.6rem; }
-  .ident { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 2.4rem; }
-  .ident img {
-    width: 144px; height: 185px; max-width: 100%;
-    object-fit: cover; display: block;
-    border: 1px solid var(--rule); border-radius: 2px;
-    flex: none;
-  }
-  .ident-body { min-width: 0; }
-  .ident-name { font-size: 1.44rem; letter-spacing: 0.02em; line-height: 1.3; margin: 0 0 0.2rem; }
-  .ident-name span { font-size: 0.85rem; letter-spacing: 0.08em; color: var(--ink-3); margin-left: 0.55rem; white-space: nowrap; }
-  .ident-role { margin: 0 0 0.75rem; color: var(--ink-2); font-size: 0.98rem; font-weight: 700; }
-  .ident-links { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.92rem; }
+  .page { max-width: 66rem; margin: 0 auto; padding: 3.2rem 1.5rem 4rem; }
 
-  h1 {
-    font-size: clamp(1.5rem, 4.6vw, 1.9rem);
-    line-height: 1.44; letter-spacing: -0.02em;
-    margin: 0 0 1.4rem; text-wrap: balance;
-  }
-  .lede { margin: 0 0 1rem; color: var(--ink-2); }
-  .hero-callout { margin: 1.6rem 0 0; padding: 0.9rem 1rem; background: var(--surface-sunk); border-left: 3px solid var(--accent); font-size: 0.95rem; color: var(--ink-2); }
+  /* ── 두 칸: 왼쪽 라벨, 오른쪽 내용 ──────── */
+  .row { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); column-gap: 3rem; padding-bottom: 2.6rem; }
+  .label { font-size: 1.15rem; font-weight: 700; color: var(--accent); margin: 0; }
+  .row > .label::before,
+  .row > .body::before { content: ""; display: block; border-top: 1px solid var(--rule); margin-bottom: 1.7rem; }
+  .row > .label::before { width: 3rem; }
+  .hero + .row > .label::before,
+  .hero + .row > .body::before { margin-top: 0; }
 
-  /* ── sections ────────────────────────── */
-  section { padding-block: 2.4rem; }
-  .sec-head { border-bottom: 2px solid var(--ink); padding-bottom: 0.5rem; margin-bottom: 1.6rem; }
-  .sec-head h2 { font-size: 1.16rem; margin: 0; letter-spacing: 0.01em; }
-  .sec-head p { margin: 0.2rem 0 0; font-size: 0.9rem; color: var(--ink-3); }
+  /* ── 맨 위 ───────────────────────────── */
+  .hero { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); column-gap: 3rem; padding-bottom: 2.6rem; }
+  .hero-left img { display: block; width: 144px; height: 185px; max-width: 100%; object-fit: cover; margin-bottom: 1.6rem; border: 1px solid var(--rule); }
+  .name { font-size: 2.3rem; line-height: 1.2; letter-spacing: 0.01em; margin: 0 0 0.25rem; color: var(--ink); }
+  .role { margin: 0 0 1.8rem; font-size: 1.05rem; color: var(--ink); }
+  .kv { margin: 0 0 1.2rem; }
+  .kv .k { display: block; font-size: 1rem; font-weight: 700; color: var(--accent); line-height: 1.4; }
+  .kv .v { display: block; font-size: 0.95rem; overflow-wrap: anywhere; }
+  .intro .label { margin-bottom: 0.7rem; }
+  .intro p { margin: 0 0 0.35rem; font-size: 1.12rem; color: var(--ink); }
+  .hero-right { padding-top: 0.3rem; }
 
-  h3 { font-size: 1.02rem; margin: 2rem 0 0.7rem; padding-left: 0.85rem; border-left: 3px solid var(--accent); line-height: 1.6; }
-  h3 .chip { margin-left: 0.45rem; }
-  p { margin: 0 0 1rem; color: var(--ink-2); }
-  ul, ol { margin: 0 0 1rem; padding-left: 1.2rem; color: var(--ink-2); }
-  li { margin-bottom: 0.35rem; }
+  /* ── 목록(대시 불릿) ─────────────────── */
+  ul.dash { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+  ul.dash li { position: relative; padding-left: 1.1rem; margin-bottom: 0.28rem; }
+  ul.dash li::before { content: "–"; position: absolute; left: 0; color: var(--ink-3); }
 
-  /* ── chips ───────────────────────────── */
-  .chip { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.16em 0.5em; border-radius: 2px; white-space: nowrap; vertical-align: 0.1em; }
-  .chip-measured { background: var(--accent-soft); color: var(--accent); }
-  .chip-scenario { background: var(--metric-soft); color: var(--metric); }
+  /* ── 자격 · 기술 · 학력 ───────────────── */
+  .item { margin: 0 0 1.1rem; }
+  .item .t { margin: 0; font-size: 1.05rem; color: var(--ink); font-weight: 700; }
+  .item .t em { font-style: normal; font-weight: 300; font-size: 0.92rem; color: var(--ink-3); margin-left: 0.5rem; }
+  .item .d { margin: 0; font-size: 0.92rem; color: var(--ink-3); }
+  .item p.x { margin: 0.15rem 0 0; font-size: 0.97rem; }
+  .skill { margin: 0 0 0.9rem; }
+  .skill .t { margin: 0 0 0.1rem; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+  .skill p { margin: 0; }
 
-  .legend { margin: 1.4rem 0 0; font-size: 0.92rem; color: var(--ink-2); }
-  .legend p { margin: 0 0 0.35rem; font-size: 0.92rem; }
+  /* ── 프로젝트 ────────────────────────── */
+  .proj { margin: 0 0 2.4rem; }
+  .proj:last-child { margin-bottom: 0; }
+  .proj h3 { margin: 0; font-size: 1.3rem; line-height: 1.4; color: var(--ink); }
+  .proj h3 .sub { font-weight: 300; color: var(--ink-2); font-size: 1.05rem; }
+  .tag { display: inline-block; margin-left: 0.5rem; padding: 0.05em 0.55em; font-size: 0.74rem; font-weight: 700; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; vertical-align: 0.18em; white-space: nowrap; }
+  .when { margin: 0.05rem 0 0; font-size: 0.9rem; color: var(--ink-3); }
+  .when, .stack { padding-left: 5.2rem; text-indent: -5.2rem; }
+  .when .k, .stack .k { text-indent: 0; display: inline-block; min-width: 4.6rem; margin-right: 0.6rem; font-weight: 700; color: var(--ink-2); }
+  .stack { margin: 0 0 0.7rem; font-size: 0.9rem; color: var(--ink-3); }
+  .next { margin: 0.7rem 0 0; font-size: 0.96rem; color: var(--ink-3); }
+  .next b { color: var(--accent); }
 
-  /* ── project ─────────────────────────── */
-  .meta { display: grid; grid-template-columns: var(--rail) 1fr; gap: 0.4rem 1.2rem; font-size: 0.95rem; background: var(--surface); border: 1px solid var(--rule); padding: 1rem 1.2rem; margin: 0 0 1.4rem; }
-  .meta dt { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; color: var(--ink-3); padding-top: 0.3rem; }
-  .meta dd { margin: 0; color: var(--ink-2); }
+  /* ── 설명 · 검증 수준 · 이동 ─────────── */
+  .proj .desc { margin: 0.35rem 0 0.7rem; color: var(--ink-2); }
+  .lv { display: inline-block; margin-left: 0.5rem; padding: 0 0.45em; font-size: 0.74rem; line-height: 1.6; color: var(--ink-3); border: 1px solid var(--rule); border-radius: 2px; white-space: nowrap; vertical-align: 0.08em; }
 
-  .p-result { color: var(--ink); }
+  .row > .label { position: sticky; top: 1.2rem; align-self: start; }
+  html { scroll-behavior: smooth; }
+  :target { scroll-margin-top: 1.5rem; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-  .steps { display: grid; margin: 0 0 1rem; }
-  .step { display: grid; grid-template-columns: 5.6rem 1fr; gap: 0.35rem 1rem; padding-block: 0.6rem; border-bottom: 1px dotted var(--rule); }
-  .step:last-child { border-bottom: none; }
-  .step dt { font-size: 0.86rem; font-weight: 700; color: var(--ink-3); padding-top: 0.35rem; }
-  .step dd { margin: 0; color: var(--ink-2); }
+  .jump { display: none; }
+  .jump a { display: block; border: none; border-left: 2px solid var(--rule); padding: 0.12rem 0 0.12rem 0.75rem; font-size: 0.9rem; color: var(--ink-3); }
+  .jump a:hover { color: var(--ink); border-left-color: var(--ink-3); }
+  .jump a[aria-current="true"] { color: var(--accent); border-left-color: var(--accent); font-weight: 700; }
+  .jump .sub a { padding-left: 1.5rem; font-size: 0.84rem; }
+  @media (min-width: 1700px) {
+    .jump { display: block; position: fixed; top: 50%; transform: translateY(-50%); left: calc(50% - 33rem - 10.5rem); width: 9.5rem; z-index: 5; }
+    }
 
-  .card { padding-block: 1.8rem 0.4rem; border-top: 1px solid var(--rule-strong); }
-  .card:first-of-type { border-top: none; padding-top: 0.2rem; }
-  .card h3 { margin-top: 0; }
-  .card .meta-line { margin: 0 0 0.9rem; font-size: 0.9rem; color: var(--ink-3); }
+  /* ── 케이스 ──────────────────────────── */
+  .case { margin: 0 0 2.4rem; }
+  .case:last-child { margin-bottom: 0; }
+  .case h3 { margin: 0 0 0.7rem; font-size: 1.15rem; color: var(--ink); line-height: 1.45; }
+  .case .from { font-size: 0.88rem; color: var(--ink-3); font-weight: 300; margin-left: 0.5rem; }
+  .case dl { margin: 0; display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: 0.45rem 1rem; }
+  .case dt { font-weight: 700; color: var(--accent); font-size: 0.92rem; padding-top: 0.12rem; }
+  .case dd { margin: 0; }
 
-  .limit { font-size: 0.95rem; color: var(--ink-3); }
-  .stack { list-style: none; padding-left: 0; }
-  .stack li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0 1rem; margin-bottom: 0.3rem; }
-  .stack li b { color: var(--ink-3); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; }
+  footer { max-width: 66rem; margin: 0 auto; padding: 0 1.5rem 4rem; display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); column-gap: 3rem; font-size: 0.92rem; color: var(--ink-3); }
+  footer .body { border-top: 1px solid var(--rule); padding-top: 1.2rem; }
+  footer p { margin: 0; }
 
-  /* ── record ──────────────────────────── */
-  .rec { display: grid; grid-template-columns: var(--rail) 1fr; gap: 0.35rem 1.3rem; padding-block: 1.2rem; border-bottom: 1px solid var(--rule); }
-  .rec:first-child { border-top: 1px solid var(--rule); }
-  .rec-when { font-size: 0.95rem; line-height: 1.5; color: var(--ink); padding-top: 0.25rem; font-variant-numeric: tabular-nums; }
-  .rec-when b { display: block; font-weight: 300; color: var(--ink-3); font-size: 0.84rem; letter-spacing: 0.02em; }
-  .rec-what > strong { display: block; margin-bottom: 0.2rem; font-weight: 700; font-size: 1rem; }
-  .rec-what > strong em { font-style: normal; font-weight: 300; font-size: 0.82rem; color: var(--ink-3); letter-spacing: 0.04em; margin-left: 0.5rem; }
-  .rec-what p { margin: 0; font-size: 0.97rem; }
-  .rec-what ul { margin: 0.1rem 0 0; padding-left: 1.05rem; font-size: 0.97rem; }
-  .rec-what li { margin-bottom: 0.15rem; }
-
-  footer { border-top: 2px solid var(--ink); margin-top: 2.5rem; padding-block: 2rem 4rem; }
-  .foot-links { display: flex; gap: 1.4rem; flex-wrap: wrap; font-size: 0.92rem; }
-  .foot-note { margin: 1.4rem 0 0; font-size: 0.86rem; color: var(--ink-3); }
-
-  @media (max-width: 560px) {
-    .rec, .meta { grid-template-columns: 1fr; gap: 0.35rem; }
-    .step { grid-template-columns: 1fr; gap: 0.1rem; }
-    .step dt { padding-top: 0.4rem; }
-    .hero { padding-block: 2.2rem 1.4rem; }
-    .ident { gap: 1.1rem; }
-    .ident img { width: 96px; height: 123px; }
-    .ident-name span { display: block; margin-left: 0; white-space: normal; }
-    .ident-links a { overflow-wrap: anywhere; }
+  @media (max-width: 760px) {
+    :root { font-size: 18px; }
+    .page { padding: 2.2rem 1.1rem 3rem; }
+    .row, .hero, footer { grid-template-columns: minmax(0, 1fr); column-gap: 0; }
+    .row > .label { margin-bottom: 0.9rem; }
+    .row > .label::before { display: none; }
+    .row > .label { position: static; }
+    .row > .body::before { margin-bottom: 1.1rem; }
+    .row > .label { order: 0; }
+    .hero-left { display: grid; grid-template-columns: 108px minmax(0, 1fr); column-gap: 1.1rem; align-items: start; margin-bottom: 1.8rem; }
+    .hero-left img { width: 108px; height: 139px; margin-bottom: 0; grid-row: 1 / span 3; }
+    .name { font-size: 1.8rem; }
+    .role { margin-bottom: 0.9rem; }
+    .case dl { grid-template-columns: minmax(0, 1fr); gap: 0.05rem; }
+    .case dt { margin-top: 0.5rem; }
+    footer .label { display: none; }
   }
 
   @media print {
+    :root { color-scheme: light; --bg: #fff; --ink: #111; --ink-2: #333; --ink-3: #666; --rule: #bbb; --accent: #0a7a64; }
     .skip { display: none; }
-    section { break-inside: auto; }
   }
 </style>
 </head>
@@ -181,256 +168,280 @@
 
 <a class="skip" href="#content">본문으로 바로가기</a>
 
-<main id="content">
-  <header class="hero wrap" id="top">
-    <div class="ident">
+<nav class="jump" aria-label="목차">
+  <a href="#top">Introduce</a>
+  <a href="#skills">Skills</a>
+  <a href="#certs">Certificates</a>
+  <a href="#awards">Awards</a>
+  <a href="#projects">Projects</a>
+  <span class="sub">
+    <a href="#getddo">GETDDO</a>
+    <a href="#mealiver">Mealiver-IT</a>
+    <a href="#mingpark">MINGPARK</a>
+    <a href="#tocktalks">TOCKTALKS</a>
+    <a href="#eta">AI-BASED-ETA</a>
+  </span>
+  <a href="#cases">Cases</a>
+  <a href="#education">Education</a>
+</nav>
+
+<main id="content" class="page">
+
+  <header class="hero" id="top">
+    <div class="hero-left">
       <img src="assets/photo.jpg" alt="윤태형 프로필 사진" width="144" height="185">
-      <div class="ident-body">
-        <p class="ident-name">윤태형<span>YUN TAE HYEONG</span></p>
-        <p class="ident-role">백엔드 개발자</p>
-        <div class="ident-links">
-          <a href="mailto:howard9166@naver.com">howard9166@naver.com</a>
-          <a href="https://github.com/YunTaeng">github.com/YunTaeng</a>
-        </div>
+      <div>
+        <h1 class="name">윤태형</h1>
+        <p class="role">Backend Engineer</p>
+      </div>
+      <div>
+        <p class="kv"><span class="k">Mail</span><span class="v"><a href="mailto:howard9166@naver.com">howard9166@naver.com</a></span></p>
+        <p class="kv"><span class="k">Github</span><span class="v"><a href="https://github.com/YunTaeng">github.com/YunTaeng</a></span></p>
       </div>
     </div>
-
-    <h1>요청이 한꺼번에 몰리는 자리를 맡아 왔습니다.</h1>
+    <div class="hero-right intro">
+      <h2 class="label">Introduce</h2>
+      <p>요청이 몰릴 때 <b>데이터가 어긋나지 않는지 테스트로 확인하는 개발자</b>입니다.</p>
+      <p>확인한 범위와 확인하지 못한 범위를 나눠 기록하고, 못 한 것은 다음 할 일로 남깁니다.</p>
+      <p>AI와 함께 만든 테스트도 직접 실행하고 DB로 대조합니다.</p>
+    </div>
   </header>
 
-  <section class="wrap" id="certs">
-    <div class="sec-head">
-      <h2>자격 · 어학</h2>
+  <section class="row" id="skills">
+    <h2 class="label">Skills.</h2>
+    <div class="body">
+      <div class="skill"><p class="t">Backend</p><p>Java · Spring Boot · Spring Security · JPA · JWT</p></div>
+      <div class="skill"><p class="t">Database</p><p>MySQL · Redis · Flyway</p></div>
+      <div class="skill"><p class="t">Test</p><p>JUnit 5 · Testcontainers · k6 · Locust</p></div>
+      <div class="skill"><p class="t">Etc</p><p>Python · Flask · React</p></div>
     </div>
-    <div>
-      <div class="rec">
-        <div class="rec-when">2026.09<b>합격</b></div>
-        <div class="rec-what">
-          <strong>SQLD<em>SQL 개발자 · 한국데이터산업진흥원</em></strong>
-        </div>
+  </section>
+
+  <section class="row" id="certs">
+    <h2 class="label">Certificates.</h2>
+    <div class="body">
+      <div class="item">
+        <p class="t">SQLD (SQL 개발자)<em>한국데이터산업진흥원</em></p>
+        <p class="d">2026.09</p>
       </div>
-      <div class="rec">
-        <div class="rec-when">2025.06<b>취득</b></div>
-        <div class="rec-what">
-          <strong>정보처리기사<em>한국산업인력공단</em></strong>
-        </div>
-      </div>
-      <div class="rec">
-        <div class="rec-when">2024.11<b>점수</b></div>
-        <div class="rec-what">
-          <strong>TOEIC 745</strong>
-        </div>
+      <div class="item">
+        <p class="t">정보처리기사<em>한국산업인력공단</em></p>
+        <p class="d">2025.06</p>
       </div>
     </div>
   </section>
 
-  <section class="wrap" id="skills">
-    <div class="sec-head">
-      <h2>기술 스택</h2>
-    </div>
-    <ul class="stack">
-      <li><b>Backend</b> Java · Spring Boot · Spring Security · JPA · JWT</li>
-      <li><b>Database</b> MySQL · Redis · Flyway</li>
-      <li><b>Test</b> JUnit 5 · Testcontainers · k6 · Locust</li>
-      <li><b>Etc</b> Python · Flask · React</li>
-    </ul>
-  </section>
-
-  <section class="wrap" id="getddo">
-    <div class="sec-head">
-      <h2>프로젝트 — 대표 사례: GETDDO</h2>
-    </div>
-
-    <p>
-      LG유플러스 유레카 과정에서 콘서트 예매 대기열, 인증, 쿠폰 시더, 응모권 정합성을 맡았습니다.
-      <b>동시에 들어오는 요청</b>을 처리하는 자리도 있었고, 데이터를 쌓고 맞추는 자리도 있었습니다.
-      그중 담당 범위가 가장 컸던 이벤트 응모 서비스(GETDDO)를 먼저 적습니다.
-    </p>
-
-    <p class="p-result">
-      <span class="chip chip-measured">측정됨</span>
-      스테이징 서버 2대에서 200명이 <b>마감 경계</b>(마감 10초 전부터 5초 뒤)에 몰리는 상황을 3회 시험했고, <b>마감 뒤 확정은 0건</b>이었습니다.
-      시험을 실행하는 과정에서 퀴즈 보상 누락 결함이 드러났고, 수정 뒤에도 연결 풀 부족으로 503이 남아 “5xx 0” 기준은 달성하지 못했습니다.
-    </p>
-
-    <dl class="meta">
-      <dt>기간</dt><dd>2026.09 ~ 10 (약 7주)</dd>
-      <dt>팀</dt><dd>백엔드 5명 · 프론트엔드 3명</dd>
-      <dt>담당</dt><dd>응모권, 출석, 미션, 응모, 요청 빈도 제한, 정합성 시험</dd>
-      <dt>스택</dt><dd>Java 21 · Spring Boot · MySQL 8.4 · Flyway · Redis · Testcontainers · Locust</dd>
-    </dl>
-
-    <h3>지켜야 했던 것</h3>
-    <ol>
-      <li>같은 요청은 한 번만 접수합니다. 접수란 응모가 확정되는 것입니다.</li>
-      <li>마감 뒤에는 확정되는 응모가 0건이어야 합니다.</li>
-      <li>서버가 두 대여도 결과는 하나여야 합니다.</li>
-    </ol>
-
-    <h3>어떻게 지켰나</h3>
-    <p>
-      클라이언트가 보낸 <b>멱등 키</b>로 중복을 걸러내고, <b>행 잠금</b>과 DB 유일 제약으로 <b>동시</b> 요청이 같은 자원을 두 번 쓰지 못하게 했습니다.
-      <b>마감 경계</b>는 세 번 확인합니다. 이벤트 행을 잠근 직후, 응모권 차감 직후, 커밋 직전입니다.
-      마지막 확인과 커밋 사이에 시각이 지날 수 있는 짧은 틈은 구현으로 없앨 수 없어서, 공용 명세에 예외로 승인받았습니다.
-    </p>
-
-    <h3>어떻게 확인했나 <span class="chip chip-measured">측정됨</span></h3>
-    <p>
-      깨지면 안 되는 규칙 8개를 AI와 함께 정하고 SQL 전수 검사로 돌렸습니다. 시험과 스크립트는 AI가 만들었고, 시험해 보기로 한 판단, 스테이징 API 2대에서의 실행, DB 대조는 직접 했습니다.
-    </p>
-    <ul>
-      <li>마감 경계 시험: 200명, 마감 10초 전~5초 뒤, 3회, 총 3,019건(접수 1,522 + 마감 거절 1,478 + 응모권 부족 19).</li>
-      <li>같은 사용자의 동시 요청 시험: 100명(3장 보유 60명, 1장 보유 30명, 같은 키 10명)이 500건을 보냈고, 접수 220 = 차감 220 = 사용 이력 220이었습니다.</li>
-    </ul>
-
-    <h3>시험이 드러낸 결함 <span class="chip chip-measured">측정됨</span></h3>
-    <dl class="steps">
-      <div class="step"><dt>증상</dt><dd>같은 사용자가 퀴즈를 문항별로 동시에 제출하면 100명 중 23명이 정답 기록만 남고 보상을 받지 못했습니다. 중복 지급은 없었습니다.</dd></div>
-      <div class="step"><dt>빠진 규칙</dt><dd>규칙 8개로는 이 결함을 잡지 못했습니다. “전 문항 정답이면 완료와 청구가 있다”는 검사가 규칙에 없었기 때문입니다.</dd></div>
-      <div class="step"><dt>수정</dt><dd>PR #184(10/26 병합). 수정 뒤 같은 부하(300명)에서 보상 누락과 중복이 0이었습니다.</dd></div>
-      <div class="step"><dt>남은 503</dt><dd>수정 뒤 연결 풀(서버당 10개)이 차서 503이 1차 264건, 2차 61건 발생했습니다. 같은 제출 ID로 재시도한 시험에서는 최종 실패 0, 퀴즈 100명 전원이 보상 1건이었습니다. 수정이 풀 압력을 키웠는지는 이 시험에서 가르지 못했습니다.</dd></div>
-      <div class="step"><dt>내 역할</dt><dd>결함은 정합성 시험을 직접 실행해 DB를 대조하는 과정에서 드러났습니다. 원인 분석과 수정 코드는 AI가 작성했습니다.</dd></div>
-    </dl>
-
-    <h3>보호 장치를 하나씩 빼 보기 <span class="chip chip-measured">측정됨</span></h3>
-    <p>
-      보호 장치 7종을 하나씩 제거한 뒤 같은 시험을 돌렸고, 6종에서 규칙 위반이 재현됐습니다. 로컬 환경에서 실행한 시험이라 스테이징 실측과는 조건이 다릅니다. 위협 지점은 AI와 함께 정했습니다.
-    </p>
-
-    <h3>남은 한계</h3>
-    <ul>
-      <li>위협 12개 가운데 서버에서 확인하지 못한 3개(월말 만료, 처리 도중 실패, 롤링 배포)가 남아 있습니다. 이 시험을 이어서 진행하려 합니다.</li>
-      <li>연결 풀 503의 원인을 특정하지 못했습니다. 풀 크기와 수정 전후를 나눠 비교해 원인을 가르고 싶습니다.</li>
-      <li>시험이 드러낸 규칙 누락처럼, 완료 조건을 규칙에 하나씩 추가하며 전수 검사 범위를 넓혀 가려 합니다.</li>
-    </ul>
-  </section>
-
-  <section class="wrap" id="projects">
-    <div class="sec-head">
-      <h2>다른 프로젝트</h2>
-    </div>
-
-    <article class="card" id="mingpark">
-      <h3>MINGPARK — 콘서트 예매 <span class="chip chip-measured">측정됨</span></h3>
-      <p class="meta-line">2026.06 ~ 07 · 3인 · Java 17, Spring Boot, Redis, MySQL</p>
-      <p class="p-result">
-        대기열 게이트를 좌석 선점 앞에 연결한 뒤, k6 스파이크 테스트(300 VU / 30초 / 50석)에서 선점 평균 응답이 200ms대에서 한 자릿수 ms로 줄었고 50석이 모두 예매됐습니다.
-        로컬 PC 한 대에서 서버, MySQL, Redis, k6를 함께 돌린 결과라 절대값이 아닌 전후 비교입니다.
-      </p>
-      <p>
-        세션 로그인과 Redis Sorted Set 대기열(ZRANK 순번, 스케줄러 입장)을 맡았습니다.
-        AI 코드 점검에서 대기열을 거치지 않고 선점 API에 직접 접근할 수 있는 경로가 지적됐고, 확인한 뒤 게이트 검사를 추가해 수정했습니다.
-        Kakao OAuth2 도입 뒤 생긴 NPE는 인증 정보를 꺼내는 지점을 하나로 모아 해결했습니다.
-      </p>
-      <p class="limit">한계: 활성 인원 50명과 1초 스케줄러 주기는 근거 있는 용량 산정이 아니라 초기 가정값입니다. 입장 인원과 주기를 부하를 올려 가며 측정해 근거 있는 값으로 정하고 싶습니다.</p>
-    </article>
-
-    <article class="card" id="tocktalks">
-      <h3>TOCKTALKS — 실시간 모의투자 <span class="chip chip-scenario">시나리오</span></h3>
-      <p class="meta-line">2026.07 (2주) · 5인 · Java 21, Spring Boot 4.1, JWT, Redis, MySQL, WebSocket/STOMP</p>
-      <p class="p-result">
-        Refresh 토큰을 1회용으로 회전시키고, 이미 회전된 토큰이 다시 들어오면 해당 계정의 토큰을 선제 무효화하도록 했습니다.
-      </p>
-      <p>
-        Auth(자체 로그인과 Kakao OAuth2)와 Room을 담당했습니다. Access 토큰은 1시간, Refresh 토큰은 14일(Redis 저장)로 나누고, 로그인 5회 실패 시 5분 잠금을 Redis 카운터로 구현했습니다.
-        로그아웃 뒤 Access 토큰이 남는 문제와 Refresh 재사용 탐지 누락은 AI 점검에서 지적된 것을 코드로 확인하고 반영했습니다.
-        Redis 장애 때는 fail-open으로 로그인이 막히지 않게 했습니다.
-      </p>
-      <p class="limit">한계: CI/CD가 없고 성능 측정도 하지 않았습니다. 부하 측정과 CI 구성을 우선 진행하려 합니다. fail-open은 가용성을 택한 대신 장애 중 로그인 대입 방어가 열립니다. 서비스 성격에 맞춰 fail-closed와 비교한 뒤 다시 판단하고 싶습니다.</p>
-    </article>
-
-    <article class="card" id="mealiver">
-      <h3>Mealiver-IT — 배달앱 선착순 쿠폰 <span class="chip chip-measured">측정됨</span></h3>
-      <p class="meta-line">2026.08 (2주) · 6인 · Java 21, Spring Boot 4.1, MySQL 8.0 + Flyway, Kafka, Docker</p>
-      <p class="p-result">
-        회원 100만, 주문 약 1,025만, 발급 이력 약 290만 건 규모의 더미 데이터를 5단계 시더로 생성했습니다.
-      </p>
-      <p>
-        회원, 주문, 등급, 캠페인, 발급 이력 순서로 참조 관계를 따라 채우는 체인을 만들었습니다.
-        청크 배치 INSERT와 <code>rewriteBatchedStatements</code>를 적용했고, 캠페인 단위 커밋과 재개(resume)를 지원해 중단 뒤 이어서 돌릴 수 있게 했습니다.
-        이 데이터셋 위에서 팀의 부하 테스트가 진행됐고, 재고 100·동시 50 조건에서 초과 발급 0건이 확인됐습니다.
-      </p>
-      <p class="limit">한계: 시더 단계별 소요 시간을 기록하지 않아 배치 옵션의 효과를 수치로 비교할 수 없습니다. 다음에는 단계별 소요 시간부터 기록해 옵션 간 차이를 확인하려 합니다.</p>
-    </article>
-  </section>
-
-  <section class="wrap" id="method">
-    <div class="sec-head">
-      <h2>일하는 방식</h2>
-    </div>
-    <p>
-      설계와 시험 스크립트는 AI와 함께 만들었고, 스테이징 서버에서 직접 실행해 DB로 대조했습니다.
-      결과에는 실측 환경과 방법을 밝혀 <span class="chip chip-measured">측정됨</span>과 <span class="chip chip-scenario">시나리오</span>를 구분했습니다.
-      확인하지 못한 범위와 남은 과제는 각 사례 끝에 적었습니다.
-    </p>
-  </section>
-
-  <section class="wrap" id="career">
-    <div class="sec-head">
-      <h2>경력</h2>
-    </div>
-    <div>
-      <div class="rec">
-        <div class="rec-when">2020.09 – 2021.05<br>2022.11 – 2025.04<b>합계 3년 3개월</b></div>
-        <div class="rec-what">
-          <strong>클라우드시큐리티 주식회사<em>경영지원</em></strong>
-          <ul>
-            <li>헬프데스크 운영 관리 보조, 사내 지원 요청 대응</li>
-            <li>IT 유·무형 자산 관리와 전산 자산 내부 컴플라이언스 대응</li>
-            <li>신규 입사자 온보딩 지원, 공용 공간·비품 관리</li>
-          </ul>
-        </div>
+  <section class="row" id="awards">
+    <h2 class="label">Awards.</h2>
+    <div class="body">
+      <div class="item">
+        <p class="t">유레카 종합프로젝트 최우수상<em>Mealiver-IT</em></p>
+        <p class="d">2026.09.01</p>
+      </div>
+      <div class="item">
+        <p class="t">유레카 최종융합프로젝트 우수상<em>GETDDO</em></p>
+        <p class="d">2026.10.28</p>
+      </div>
+      <div class="item">
+        <p class="t">세종대 캡스톤 우수상<em>AI-BASED-ETA</em></p>
+        <p class="d">2024</p>
       </div>
     </div>
   </section>
 
-  <section class="wrap" id="education">
-    <div class="sec-head">
-      <h2>학력 · 교육</h2>
+  <section class="row" id="projects">
+    <h2 class="label">Projects.</h2>
+    <div class="body">
+
+      <article class="proj" id="getddo">
+        <h3>GETDDO <span class="sub">/ 이벤트 응모권 서비스</span><span class="tag">대표</span><span class="tag">우수상</span></h3>
+        <p class="desc">출석·미션·게임으로 모은 응모권으로 이벤트에 응모하고 추첨 결과를 확인하는 서비스입니다. 응모권을 돈에 준해 다루는 것이 과제 조건이었습니다.</p>
+        <p class="when"><span class="k">기간·인원</span>2026.09 ~ 10 (약 7주) · 8명(백엔드 5, 프론트엔드 3)</p>
+        <p class="when"><span class="k">담당</span>응모권, 출석, 미션, 응모, 요청 빈도 제한, 정합성 테스트</p>
+        <p class="stack"><span class="k">스택</span>Java 21 · Spring Boot · MySQL 8.4 · Flyway · Redis · Testcontainers · Locust · <a href="https://github.com/Uplus-GETDDO/getddo-be">GitHub ↗</a></p>
+        <ul class="dash">
+          <li>응모권 모델: 한 장을 한 행으로, 상태 변경은 이력만 추가하는 구조로 설계</li>
+          <li>응모 처리: 응모·차감·이력을 한 트랜잭션으로 묶고 <b>멱등 키</b>와 <b>행 잠금</b>으로 중복 요청 차단</li>
+          <li>보상 중복 방지: 출석·미션 보상이 두 번 반영되지 않게 유일 제약과 요청 해시 사용</li>
+          <li>요청 빈도 제한: Redis 공유 카운터로 서버가 여러 대여도 한도를 하나로 합산</li>
+          <li><b>마감 경계</b>: 스테이징 API 2대에서 3회 테스트, 마감 뒤 확정 0건(접수 = 차감 = 사용 이력)<span class="lv">측정됨</span></li>
+          <li>결함 발견: 테스트에서 퀴즈 보상 누락(23/100명)이 드러났고, 수정 뒤 누락·중복 0<span class="lv">측정됨</span></li>
+          <li>보호 장치 테스트: 7종을 하나씩 빼 보니 6종에서 규칙 위반 재현<span class="lv">측정됨 · 로컬</span></li>
+        </ul>
+        <p class="next"><b>다음</b> 서버에서 못 한 테스트 3개(월말 만료, 처리 도중 실패, 롤링 배포)와 연결 풀 503의 원인 분리</p>
+      </article>
+
+      <article class="proj" id="mealiver">
+        <h3>Mealiver-IT <span class="sub">/ 배달앱 선착순 쿠폰</span><span class="tag">최우수상</span></h3>
+        <p class="desc">배달앱의 매일 오전 11시 선착순 쿠폰 발급을 가정한 시스템입니다. 팀 전원이 논의와 멘토링을 거쳐 재고 확보 방식을 한 단계씩 올렸습니다.</p>
+        <p class="when"><span class="k">기간·인원</span>2026.08 · 6명</p>
+        <p class="when"><span class="k">담당</span>재고 확보 방식 논의 참여, 결정과 이유 문서 정리, 테스트용 더미 데이터</p>
+        <p class="stack"><span class="k">스택</span>Java 21 · Spring Boot 4.1 · MySQL 8.0 · Flyway · Redis · k6 · <a href="https://github.com/Mealiver-IT/Mealiver-IT-BE">GitHub ↗</a></p>
+        <ul class="dash">
+          <li>과제 조건: 재고 1만 개, 요청 2만 건에서도 초과 발급 0건과 1인 1매</li>
+          <li>V2 <b>비관적 락</b>: 초과 발급은 없었지만 재고 한 행에 요청이 몰려 9,766건·9,891건만 발급, 응답 시간 6.6초 → 51초</li>
+          <li>V3 Redis 사전 필터: 판단은 DB가 하고 Redis는 품절 뒤 요청만 거름, 재고가 남은 동안의 경합은 그대로(10,000건·9,952건)</li>
+          <li>V4 <b>재고 샤딩</b>: 재고를 50개 행으로 나눠 경합을 분산, 두 번 모두 정확히 1만 건 발급</li>
+          <li>결과: 같은 조건 테스트 6회 모두 초과 발급 0건<span class="lv">측정됨 · 팀 테스트</span></li>
+          <li>더미 데이터: 테스트용 회원 100만, 주문 약 1,025만, 발급 이력 약 290만 건을 5단계 시더로 생성</li>
+        </ul>
+        <p class="next"><b>다음</b> V1(제어 없음)은 그림으로만 설명해서, 초과 발급을 직접 재현하는 대조군 테스트 남기기</p>
+      </article>
+
+      <article class="proj" id="mingpark">
+        <h3>MINGPARK <span class="sub">/ 콘서트 예매 서비스</span></h3>
+        <p class="desc">공연 탐색부터 대기열 입장, 좌석 선점, 포인트 결제와 환불까지 이어지는 콘서트 예매 서비스입니다.</p>
+        <p class="when"><span class="k">기간·인원</span>2026.06 ~ 07 (약 5주) · 3명(백엔드)</p>
+        <p class="when"><span class="k">담당</span>세션 로그인, Redis 대기열, 마이페이지</p>
+        <p class="stack"><span class="k">스택</span>Java 17 · Spring Boot · Spring Security · MySQL · Redis · JPA · <a href="https://github.com/minggure/Mingpark">GitHub ↗</a></p>
+        <ul class="dash">
+          <li>인증: Spring Security 세션 로그인, 관리자·일반 권한 분리</li>
+          <li>대기열: Redis Sorted Set으로 순번(ZRANK)을 매기고 스케줄러가 입장 허용</li>
+          <li>게이트: AI 코드 점검에서 지적된 우회 경로를 확인하고, 좌석 선점 API에 대기열 통과 검사 추가</li>
+          <li>결과: k6 300 VU / 30초 전후 비교에서 좌석 선점 평균 응답 200ms대 → 한 자릿수 ms, 50석 모두 예매<span class="lv">측정됨 · 로컬</span></li>
+          <li>Kakao OAuth2: 도입 뒤 생긴 NPE를 인증 정보 조회 지점 단일화로 해결</li>
+          <li>마이페이지: 예매 내역, 포인트, 환불</li>
+        </ul>
+        <p class="next"><b>다음</b> 입장 인원 50명과 주기 1초를 부하를 올려 가며 측정해 근거 있는 값으로 정하기</p>
+      </article>
+
+      <article class="proj" id="tocktalks">
+        <h3>TOCKTALKS <span class="sub">/ 실시간 모의투자 서비스</span></h3>
+        <p class="desc">같은 시드머니로 방을 만들어 수익률을 겨루고 투자 카드를 커뮤니티에 공유하는 모의투자 서비스입니다. 실시간 주가는 KIS Open API에서 받아옵니다.</p>
+        <p class="when"><span class="k">기간·인원</span>2026.07 (2주) · 5명(백엔드)</p>
+        <p class="when"><span class="k">담당</span>Auth(자체 로그인, Kakao OAuth2), Room</p>
+        <p class="stack"><span class="k">스택</span>Java 21 · Spring Boot 4.1 · Spring Security · JWT · Redis · MySQL · WebSocket/STOMP · <a href="https://github.com/TockTalks/ureca_TockTalks">GitHub ↗</a></p>
+        <ul class="dash">
+          <li>토큰: Access 1시간·Refresh 14일(Redis 저장), Refresh 1회용 회전과 재사용 시 해당 계정 토큰 전체 무효화<span class="lv">시나리오</span></li>
+          <li>로그인 잠금: 5회 실패 시 5분 잠금(Redis 카운터), Redis 장애 때는 fail-open으로 로그인 유지</li>
+          <li>WebSocket: 연결 시점에 토큰 검증</li>
+          <li>방 참여: <b>비관적 락</b>을 잡은 뒤 조건 재확인</li>
+          <li>AI 점검 반영: 로그아웃 뒤 남는 Access 토큰과 Refresh 재사용 탐지 누락을 코드로 확인해 반영</li>
+        </ul>
+        <p class="next"><b>다음</b> 부하 측정과 CI 구성, fail-open을 fail-closed와 비교해 다시 판단</p>
+      </article>
+
+      <article class="proj" id="eta">
+        <h3>AI-BASED-ETA <span class="sub">/ 도착 시간 예측 서비스 (세종대 캡스톤)</span><span class="tag">우수상</span></h3>
+        <p class="desc">한국도로공사 VDS 교통 데이터로 학습한 모델로, 출발 시각에 따라 달라지는 도착 시간과 최단 시간 경로를 계산하는 서비스입니다.</p>
+        <p class="when"><span class="k">기간·인원</span>2024.03 ~ 06 (4개월) · 4명</p>
+        <p class="when"><span class="k">담당</span>Kakao 지도 화면, GCP·Flask 환경 세팅, 경로 탐색 알고리즘 3인 공동 설계</p>
+        <p class="stack"><span class="k">스택</span>React · Python · Flask · GCP · Kakao Map · <a href="https://github.com/AI-based-ETA">GitHub ↗</a></p>
+        <ul class="dash">
+          <li>가변 가중치 A*: 기존의 정적인 가중치 A*가 아니라, 탐색이 진행되면 간선의 비용이 달라지는 알고리즘 설계에 참여</li>
+          <li>Sliding Window: 모델이 60분까지만 예측해서, 누적 시각이 1시간 5분을 넘으면 예측을 다시 요청</li>
+          <li>Kakao 지도: 출발지·도착지 자동완성, 경로 그리기 화면(React)</li>
+          <li>GCP: Flask 서버 환경을 구성하고, 학습 환경에 맞춰 Python 3.6으로 고정, 공용 디렉터리·가상환경 권한 정리</li>
+          <li>결과: 서울시청에서 인천시청까지 55분으로 경로와 도착 시간 산출<span class="lv">시나리오</span></li>
+        </ul>
+        <p class="next"><b>다음</b> 같은 출발 시각 기준으로 여러 경로의 예측 오차 집계(지금은 몇 개 경로를 지도 API 결과와 눈으로 비교한 수준)</p>
+      </article>
+
     </div>
-    <div>
-      <div class="rec">
-        <div class="rec-when">2026.04 – 10<b>수료</b></div>
-        <div class="rec-what">
-          <strong>[LG유플러스] 유레카 SW교육과정 4기<em>부트캠프</em></strong>
-          <p>백엔드 과정 (2026.04.06 ~ 2026.10.28). MINGPARK · TOCKTALKS · Mealiver-IT · GETDDO 네 개의 팀 프로젝트를 수행했습니다.</p>
-        </div>
+  </section>
+
+  <section class="row" id="cases">
+    <h2 class="label">Cases.</h2>
+    <div class="body">
+
+      <article class="case">
+        <h3>마감을 세 번 확인한 이유 <span class="from">GETDDO</span></h3>
+        <dl>
+          <dt>상황</dt><dd>마감 직전에는 응모가 한꺼번에 몰립니다. “아직 열려 있음”을 확인한 뒤 저장하는 사이에 마감이 지날 수 있습니다.</dd>
+          <dt>원인</dt><dd>확인과 저장이 한 단계가 아니어서, 확인한 순간의 상태가 저장할 때까지 그대로라는 보장이 없습니다.</dd>
+          <dt>조치</dt><dd>이벤트 행을 잠근 직후, 응모권 차감 직후, 커밋 직전에 마감을 확인합니다. 커밋 직전 확인에서 마감을 넘었으면 응모 전체를 롤백합니다.</dd>
+          <dt>결과</dt><dd>스테이징 API 2대에서 200명이 마감 10초 전부터 5초 뒤까지 응모를 보내는 테스트를 3회 했습니다. 접수, 차감, 사용 이력이 모두 1,522건으로 같았고, 마감 뒤 확정은 0건이었습니다.<span class="lv">측정됨</span></dd>
+          <dt>남은 과제</dt><dd>마지막 확인과 DB 커밋 사이의 짧은 틈은 구현으로 없앨 수 없어서, 공용 명세에 예외로 승인받았습니다.</dd>
+        </dl>
+      </article>
+
+      <article class="case">
+        <h3>정합성 규칙을 통과했는데도 결함이 있었던 이유 <span class="from">GETDDO</span></h3>
+        <dl>
+          <dt>상황</dt><dd>같은 사용자가 퀴즈를 문항별로 동시에 제출하면 100명 중 23명이 정답 기록만 남고 보상을 받지 못했습니다. 중복 지급은 없었습니다.</dd>
+          <dt>원인</dt><dd>미리 정한 정합성 규칙 8개에 “전 문항 정답이면 완료와 청구가 있다”는 검사가 없었습니다. 규칙이 통과해도 결함이 없다는 뜻은 아니었습니다.</dd>
+          <dt>조치</dt><dd>같은 사용자의 제출이 겹치지 않게 순서대로 처리하도록 고쳤습니다.</dd>
+          <dt>결과</dt><dd>같은 부하(300명)로 다시 테스트해 보상 누락과 중복이 0이었습니다.<span class="lv">측정됨</span></dd>
+          <dt>남은 과제</dt><dd>수정 뒤 연결 풀(서버당 10개)이 차서 503이 1차 264건, 2차 61건 났습니다. 같은 제출 ID로 재시도하면 최종 실패는 0이었지만, 수정이 풀 압력을 키웠는지는 아직 가르지 못했습니다.</dd>
+          <dt>내 역할</dt><dd>테스트를 해 보기로 하고, 직접 실행해 DB를 대조하다가 결함이 드러났습니다. 원인 분석과 수정 코드는 AI가 작성했습니다.</dd>
+        </dl>
+      </article>
+
+      <article class="case">
+        <h3>재고 판단을 Redis가 아니라 DB에 맡긴 이유 <span class="from">Mealiver-IT · 팀 결정</span></h3>
+        <dl>
+          <dt>상황</dt><dd>V2 비관적 락은 초과 발급이 없었지만, 재고 한 행에 요청이 몰려 재고 1만 개 중 9,766건과 9,891건만 발급됐습니다.</dd>
+          <dt>원인</dt><dd>다음 단계로 Redis 이중카운터를 계획했지만, 실패한 요청도 앞 카운터를 소모해 재고가 남았는데 품절될 수 있었습니다. 멘토링에서는 Redis를 원장으로 두면 장애 때 기준으로 삼을 데이터가 없어진다는 조언을 받았습니다.</dd>
+          <dt>조치</dt><dd>판단은 끝까지 DB가 하고, Redis는 품절 뒤 요청만 거르는 사전 필터로 바꿨습니다(V3). 남은 경합은 재고를 50개 행으로 나눠 분산했습니다(V4).</dd>
+          <dt>결과</dt><dd>같은 조건 테스트 6회 모두 초과 발급 0건이었고, V4는 두 번 모두 정확히 1만 건이 발급됐습니다. 이와 별도로 V4 도입 뒤 한 테스트에서 261건 초과가 재현됐는데, 원인은 재고 판단이 아니라 실제로는 커밋된 INSERT를 실패로 보고 재고를 되돌린 복원 로직이었습니다. 복원 전에 커밋 여부부터 확인하도록 고쳤습니다.<span class="lv">측정됨 · 팀 테스트</span></dd>
+          <dt>남은 과제</dt><dd>V1(제어 없음)은 그림으로만 설명해서, 초과 발급을 직접 재현한 대조군 데이터가 없습니다.</dd>
+          <dt>내 역할</dt><dd>논의에 참여하고, 결정과 이유를 AI와 함께 문서로 정리했습니다. 테스트에 쓸 더미 데이터를 만들었습니다.</dd>
+        </dl>
+      </article>
+
+      <article class="case">
+        <h3>대기열이 있는데도 좌석 선점이 느렸던 이유 <span class="from">MINGPARK</span></h3>
+        <dl>
+          <dt>상황</dt><dd>대기열이 동작하는데도 좌석 선점 API의 평균 응답이 200ms대까지 올랐습니다.</dd>
+          <dt>원인</dt><dd>로그인만 하면 대기열을 거치지 않고 선점을 요청할 수 있어, 요청이 그대로 Redis 락 경합으로 이어졌습니다. AI 코드 점검에서 지적된 경로를 확인한 것입니다.</dd>
+          <dt>조치</dt><dd>좌석 선점 API에 대기열 통과 검사를 추가했습니다.</dd>
+          <dt>결과</dt><dd>같은 조건(300 VU / 30초 / 50석)에서 코드만 바꿔 두 번 돌렸습니다. 평균 응답이 한 자릿수 ms로 줄었고 50석이 모두 예매됐습니다. 대신 사용자는 평균 약 8초를 대기열에서 기다립니다.<span class="lv">측정됨 · 로컬</span></dd>
+          <dt>남은 과제</dt><dd>로컬 PC 한 대에서 서버, MySQL, Redis, k6를 함께 돌린 결과라 절대값이 아닌 전후 비교입니다.</dd>
+        </dl>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="row" id="education">
+    <h2 class="label">Education.</h2>
+    <div class="body">
+      <div class="item">
+        <p class="t">[LG유플러스] 유레카 SW교육과정 4기<em>백엔드 부트캠프</em></p>
+        <p class="d">2026.04 ~ 10 · 수료</p>
+        <p class="x">MINGPARK · TOCKTALKS · Mealiver-IT · GETDDO 네 개의 팀 프로젝트를 수행했습니다.</p>
       </div>
-      <div class="rec">
-        <div class="rec-when">2019.02 – 2026.02<b>졸업</b></div>
-        <div class="rec-what">
-          <strong>세종대학교 컴퓨터공학과</strong>
-          <p>학점 3.68 / 4.5</p>
-        </div>
-      </div>
-      <div class="rec">
-        <div class="rec-when">2024.03 – 06<b>캡스톤</b></div>
-        <div class="rec-what">
-          <strong>AI-BASED-ETA<em>세종대 캡스톤, 4인</em></strong>
-          <p>Kakao 지도 프런트(React)와 GCP Ubuntu·Flask 환경 세팅, 경로 탐색 알고리즘 3인 공동 설계. <a href="https://github.com/AI-based-ETA">저장소 ↗</a></p>
-        </div>
-      </div>
-      <div class="rec">
-        <div class="rec-when">학부 시절<b>동아리</b></div>
-        <div class="rec-what">
-          <strong>세종대학교 중앙동아리 인터페이스<em>코딩 동아리</em></strong>
-          <p>기장을 맡아 프로그래밍 전시회에 참여했고 비전공자·문과생을 위한 정기 스터디를 개설해 운영했습니다.</p>
-        </div>
+      <div class="item">
+        <p class="t">세종대학교 컴퓨터공학과</p>
+        <p class="d">2019.02 ~ 2026.02 · 졸업</p>
       </div>
     </div>
   </section>
 
-  <footer class="wrap">
-    <div class="foot-links">
-      <a href="mailto:howard9166@naver.com">howard9166@naver.com</a>
-      <a href="https://github.com/YunTaeng">GitHub ↗</a>
-      <a href="#top">맨 위로 ↑</a>
-    </div>
-    <p class="foot-note">
-      이 페이지의 수치는 저장소 문서와 실행 기록에서 확인한 값만 적었습니다.
-    </p>
-  </footer>
 </main>
+
+<footer>
+  <div class="label"></div>
+  <div class="body">
+    <p>이 페이지의 수치는 저장소 기록과 최종 발표 자료에서 확인한 값만 적었습니다. <b>측정됨</b>은 실행 기록이 남아 있는 결과, <b>시나리오</b>는 동작만 확인한 결과입니다.</p>
+  </div>
+</footer>
+
+
+<script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".jump a"));
+    if (!links.length) return;
+    var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+    var queued = false;
+    function update() {
+      queued = false;
+      var active = 0;
+      for (var i = 0; i < targets.length; i++) {
+        if (targets[i] && targets[i].getBoundingClientRect().top <= 140) active = i;
+      }
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) active = links.length - 1;
+      for (var j = 0; j < links.length; j++) {
+        if (j === active) links[j].setAttribute("aria-current", "true");
+        else links[j].removeAttribute("aria-current");
+      }
+    }
+    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  })();
+</script>
 
 </body>
 </html>
