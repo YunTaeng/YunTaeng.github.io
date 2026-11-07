@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>윤태형 포트폴리오</title>
+<script>
+  /* 저장된 테마를 먼저 적용해 첫 화면이 깜빡이지 않게 한다 */
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
 <style>
   /* KS X 1001 완성형 2350자로 서브셋한 woff2. 본문 Light, 강조 Bold 두 종 */
   @font-face {
@@ -22,11 +26,11 @@
   }
 
   :root {
-    --bg:      #2b3136;
-    --ink:     #f1f3f4;
-    --ink-2:   #cdd3d7;
-    --ink-3:   #8e98a0;
-    --rule:    #566067;
+    --bg:      #14201f;
+    --ink:     #e9f1ef;
+    --ink-2:   #c3d2cf;
+    --ink-3:   #8fa5a1;
+    --rule:    #36504d;
     --accent:  #3fe0b8;
 
     --sans: "Freesentation", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
@@ -34,6 +38,22 @@
     color-scheme: dark;
     font-size: 19px;
   }
+
+  /* 라이트: 기기 설정이 밝으면 자동, 토글로 직접 고르면 그 값이 우선 */
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f5f8f7; --ink: #1b2a2a; --ink-2: #3a4c4a; --ink-3: #5b6e6b; --rule: #c3d1ce; --accent: #0a7a64;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) {
+      color-scheme: light;
+      --bg: #f5f8f7; --ink: #1b2a2a; --ink-2: #3a4c4a; --ink-3: #5b6e6b; --rule: #c3d1ce; --accent: #0a7a64;
+    }
+  }
+
+  .theme-toggle { position: absolute; top: 1rem; right: 1.2rem; z-index: 20; padding: 0.2rem 0.7rem; font: inherit; font-size: 0.82rem; font-weight: 700; color: var(--ink-2); background: var(--bg); border: 1px solid var(--rule); border-radius: 2px; cursor: pointer; }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   * { box-sizing: border-box; }
 
@@ -74,6 +94,8 @@
   .hero-left img { display: block; width: 144px; height: 185px; max-width: 100%; object-fit: cover; margin-bottom: 1.6rem; border: 1px solid var(--rule); }
   .name { font-size: 2.3rem; line-height: 1.2; letter-spacing: 0.01em; margin: 0 0 0.25rem; color: var(--ink); }
   .role { margin: 0 0 1.8rem; font-size: 1.05rem; color: var(--ink); }
+  .contact { display: flex; flex-wrap: wrap; gap: 0.4rem 2.4rem; margin-top: 1.5rem; }
+  .contact .kv { margin: 0; }
   .kv { margin: 0 0 1.2rem; }
   .kv .k { display: block; font-size: 1rem; font-weight: 700; color: var(--accent); line-height: 1.4; }
   .kv .v { display: block; font-size: 0.95rem; overflow-wrap: anywhere; }
@@ -150,7 +172,7 @@
     .row > .body::before { margin-bottom: 1.1rem; }
     .row > .label { order: 0; }
     .hero-left { display: grid; grid-template-columns: 108px minmax(0, 1fr); column-gap: 1.1rem; align-items: start; margin-bottom: 1.8rem; }
-    .hero-left img { width: 108px; height: 139px; margin-bottom: 0; grid-row: 1 / span 3; }
+    .hero-left img { width: 108px; height: 139px; margin-bottom: 0; grid-row: 1 / span 2; }
     .name { font-size: 1.8rem; }
     .role { margin-bottom: 0.9rem; }
     .case dl { grid-template-columns: minmax(0, 1fr); gap: 0.05rem; }
@@ -159,14 +181,15 @@
   }
 
   @media print {
-    :root { color-scheme: light; --bg: #fff; --ink: #111; --ink-2: #333; --ink-3: #666; --rule: #bbb; --accent: #0a7a64; }
-    .skip { display: none; }
+    :root, :root[data-theme="dark"], :root[data-theme="light"] { color-scheme: light; --bg: #fff; --ink: #111; --ink-2: #333; --ink-3: #666; --rule: #bbb; --accent: #0a7a64; }
+    .skip, .theme-toggle { display: none; }
   }
 </style>
 </head>
 <body>
 
 <a class="skip" href="#content">본문으로 바로가기</a>
+<button class="theme-toggle" type="button" id="themeToggle" aria-label="화면 색상 전환">Light</button>
 
 <nav class="jump" aria-label="목차">
   <a href="#top">Introduce</a>
@@ -194,16 +217,16 @@
         <h1 class="name">윤태형</h1>
         <p class="role">Backend Engineer</p>
       </div>
-      <div>
-        <p class="kv"><span class="k">Mail</span><span class="v"><a href="mailto:howard9166@naver.com">howard9166@naver.com</a></span></p>
-        <p class="kv"><span class="k">Github</span><span class="v"><a href="https://github.com/YunTaeng">github.com/YunTaeng</a></span></p>
-      </div>
     </div>
     <div class="hero-right intro">
       <h2 class="label">Introduce</h2>
       <p>요청이 몰릴 때 <b>데이터가 어긋나지 않는지 테스트로 확인하는 개발자</b>입니다.</p>
       <p>확인한 범위와 확인하지 못한 범위를 나눠 기록하고, 못 한 것은 다음 할 일로 남깁니다.</p>
       <p>AI와 함께 만든 테스트도 직접 실행하고 DB로 대조합니다.</p>
+      <div class="contact">
+        <p class="kv"><span class="k">Mail</span><span class="v"><a href="mailto:howard9166@naver.com">howard9166@naver.com</a></span></p>
+        <p class="kv"><span class="k">Github</span><span class="v"><a href="https://github.com/YunTaeng">github.com/YunTaeng</a></span></p>
+      </div>
     </div>
   </header>
 
@@ -243,8 +266,8 @@
         <p class="d">2026.10.28</p>
       </div>
       <div class="item">
-        <p class="t">세종대 캡스톤 우수상<em>AI-BASED-ETA</em></p>
-        <p class="d">2024</p>
+        <p class="t">세종대 창의설계경진대회 우수상<em>AI-BASED-ETA</em></p>
+        <p class="d">2024.06.14</p>
       </div>
     </div>
   </section>
@@ -300,7 +323,6 @@
           <li>결과: 같은 조건 테스트 6회 모두 초과 발급 0건<span class="lv">측정됨 · 팀 테스트</span></li>
           <li>더미 데이터: 테스트용 회원 100만, 주문 약 1,025만, 발급 이력 약 290만 건을 5단계 시더로 생성</li>
         </ul>
-        <p class="next"><b>다음</b> V1(제어 없음)은 그림으로만 설명해서, 초과 발급을 직접 재현하는 대조군 테스트 남기기</p>
       </article>
 
       <article class="proj" id="mingpark">
@@ -389,7 +411,6 @@
           <dt>원인</dt><dd>다음 단계로 Redis 이중카운터를 계획했지만, 실패한 요청도 앞 카운터를 소모해 재고가 남았는데 품절될 수 있었습니다. 멘토링에서는 Redis를 원장으로 두면 장애 때 기준으로 삼을 데이터가 없어진다는 조언을 받았습니다.</dd>
           <dt>조치</dt><dd>판단은 끝까지 DB가 하고, Redis는 품절 뒤 요청만 거르는 사전 필터로 바꿨습니다(V3). 남은 경합은 재고를 50개 행으로 나눠 분산했습니다(V4).</dd>
           <dt>결과</dt><dd>같은 조건 테스트 6회 모두 초과 발급 0건이었고, V4는 두 번 모두 정확히 1만 건이 발급됐습니다. 이와 별도로 V4 도입 뒤 한 테스트에서 261건 초과가 재현됐는데, 원인은 재고 판단이 아니라 실제로는 커밋된 INSERT를 실패로 보고 재고를 되돌린 복원 로직이었습니다. 복원 전에 커밋 여부부터 확인하도록 고쳤습니다.<span class="lv">측정됨 · 팀 테스트</span></dd>
-          <dt>남은 과제</dt><dd>V1(제어 없음)은 그림으로만 설명해서, 초과 발급을 직접 재현한 대조군 데이터가 없습니다.</dd>
           <dt>내 역할</dt><dd>논의에 참여하고, 결정과 이유를 AI와 함께 문서로 정리했습니다. 테스트에 쓸 더미 데이터를 만들었습니다.</dd>
         </dl>
       </article>
@@ -418,6 +439,26 @@
 </footer>
 
 
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("themeToggle");
+    var mq = window.matchMedia("(prefers-color-scheme: light)");
+    function current() {
+      var t = root.getAttribute("data-theme");
+      return t ? t : (mq.matches ? "light" : "dark");
+    }
+    function label() { btn.textContent = current() === "dark" ? "Light" : "Dark"; }
+    btn.addEventListener("click", function () {
+      var next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      label();
+    });
+    if (mq.addEventListener) mq.addEventListener("change", label);
+    label();
+  })();
+</script>
 <script>
   (function () {
     var links = Array.prototype.slice.call(document.querySelectorAll(".jump a"));
